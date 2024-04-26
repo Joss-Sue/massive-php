@@ -1,0 +1,190 @@
+
+.inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}
+
+.bebas {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.white-text{
+  color: white;
+}
+
+.one-col{
+  width: 8.3vw;
+}
+
+.two-col{
+  width: 16.6vw;
+}
+
+.three-col{
+  width: 25vw;
+}
+
+.four-col{
+  width: 33.3vw;
+}
+
+.five-col{
+  width: 41.6vw;
+}
+
+.six-col{
+  width: 50vw;
+}
+
+.seven-col{
+  width: 58.3vw;
+}
+
+.eight-col{
+  width: 66.6vw;
+}
+
+.nine-col{
+  width: 75vw;
+}
+
+.ten-col{
+  width: 83.3vw;
+}
+
+.eleven-col{
+  width: 91.6vw;
+}
+
+.twelve-col{
+  width: 100vw;
+}
+
+.cart-button{
+  text-decoration: none;
+  background-color: #006D77;
+  font-size: 20px;
+  color: white;
+  padding: 10px 15px 10px 15px;
+  border-radius: 24px;
+}
+
+.header{
+  background-color: #006D77;
+  min-height: 75px;
+  display: flex;
+}
+.header .name-page{
+  display: flex;
+  align-items: center;
+}
+
+.header .name-page img{
+  max-width: 46px;
+  margin-right: 13px;
+}
+
+.header .name-page span{
+  font-size: 36px;
+}
+
+.header .cart-user{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header .cart-user img:first-child{
+  max-width: 41.5px;
+}
+
+.header .cart-user img:nth-child(2){
+  max-width: 56px;
+  margin-left: 60px;
+}
+
+.categories{
+  display: flex;
+  background-color: #E4E4E4;
+}
+
+.categories div:nth-child(2){
+  display: flex;
+  justify-content: space-around;
+}
+
+.categories a{
+  text-decoration: none;
+  font-size: 15px;
+  color: #36393B;
+  margin: 5px 0px 5px 0px;
+}
+
+.black{
+  color: #36393B;
+}
+
+.button-massive{
+  font-family: "Bebas Neue", sans-serif;
+  background-color: #006D77;
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+
+.button-massive:focus{
+  border: none;
+}
+
+.input-massive{
+  background-color: #DCEDEF;
+  border: none;
+  border-bottom: solid #000000 6px;
+  border-radius: 8px;
+  height: 40px;
+  max-width: 80%;
+  font-family: "Inter", sans-serif;
+}
+
+.input-massive:focus{
+  outline: none;
+}
+
+.input-massive::placeholder{
+  margin-left: 15px;
+  padding-left: 15px;
+}
+
+.search-bar{
+    display: flex;
+    align-items: center;
+}
+
+.search-bar span{
+    display: flex;
+    background-color: #EDF6F9;
+    width: 40%;
+}
+
+.search-bar span input{
+    background-color: #EDF6F9;
+    border: none;
+    width: 250px;
+}
+
+.search-bar span img{
+    width: 80%;
+}
+
+.search-bar span input:focus{
+    outline: none;
+}
+
+.green-text{
+  color: #5BBA2E;
+}

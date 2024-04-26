@@ -1,0 +1,23 @@
+.login-body{
+    background-color: #EDF6F9;
+    height: 90vh;
+}
+
+.login-body h1{
+    font-size: 80px;
+    margin-top: 80px;
+}
+
+.login-body form{
+    display: grid;
+}
+
+.login-body form input, .login-body form button{
+    margin-top: 20px;
+}
+
+.login-body form button{
+    max-width: 40%;
+    font-size: 30px;
+    margin-bottom: 10px;
+}

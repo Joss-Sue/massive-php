@@ -1,0 +1,32 @@
+.signup-body{
+    background-color: #EDF6F9;
+    height: 90vh;
+}
+
+.signup-body h1{
+    font-size: 80px;
+    margin: 50px 0px 30px 0px;
+}
+
+.signup-body .form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-body .form-container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-body .form-container form input{
+    width: 30vw;
+    margin-bottom: 15px;
+}
+
+.signup-body form button{
+    width: 15vw;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
