@@ -1,0 +1,132 @@
+CREATE DATABASE DB_FINALV2;
+
+USE DB_FINALV2;
+
+CREATE TABLE IF NOT EXISTS USUARIOS (
+	
+    ID_USUARIO VARCHAR(36) COMMENT 'Tagname escrito por usuario',
+    CONTRASENA VARCHAR(255) NOT NULL COMMENT 'Clave para iniciar sesion',
+    CORREO VARCHAR(255) NOT NULL COMMENT 'Correo electronico',
+    ROL TINYINT NOT NULL COMMENT 'Tipo de usuario, 0 admin, 1 comprador/vendedor, 2 comprador',
+    -- COMO PONER UNA IMAGEN DEFAULT
+    IMAGEN_PERFIL MEDIUMBLOB NULL COMMENT 'Foto de perfil',
+    NOMBRE VARCHAR(255) NOT NULL COMMENT 'Primer y segundo nombre',
+    APELLIDO VARCHAR(255) NOT NULL COMMENT 'Primer y segundo apellido',
+    FECHA_NACIMIENTO DATE NOT NULL COMMENT 'Fecha de nacimiento',
+    GENERO VARCHAR(8) NOT NULL COMMENT 'hombre o mujer',
+    FECHA_CREACION DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creacion usuario',
+    -- TRIGGER PARA PONER LA FECHA DE MODIF COMO TIMESTAMP CUANDO SE HACE INSERT
+    FECHA_MODIFICACION DATETIME COMMENT 'Fecha de modificacion usuario',
+    USUARIO_EDITOR VARCHAR(24) COMMENT 'Usuario que modifico usuario',
+    ACTIVO BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica usuario',
+    PUBLICA BOOLEAN DEFAULT TRUE COMMENT 'Indica si el usuario es publico o privado',
+    
+    PRIMARY KEY (CORREO),
+    INDEX idx_rol (ROL),
+    INDEX idx_activo (ACTIVO)
+    
+    
+);
+
+CREATE TABLE IF NOT EXISTS CATEGORIAS (
+	ID_CATEG INT AUTO_INCREMENT COMMENT 'Identificador unico categoria',
+    NOMBRE_CATEG VARCHAR(255) NOT NULL COMMENT 'Nombre de la categoria',
+    DESCRIPCION_CATEG TEXT COMMENT 'Descripcion de la categoria',
+    FECHA_CREACION DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creacion categoria',
+    -- TRIGGER PARA PONER LA FECHA DE MODIF COMO TIMESTAMP CUANDO SE HACE INSERT
+    FECHA_MODIFICACION DATETIME NOT NULL COMMENT 'Fecha de modificacion categoria',
+    USUARIO_EDITOR VARCHAR(24) COMMENT 'Usuario que modifico categoria',
+    ACTIVO BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica categoria',
+    
+    PRIMARY KEY (ID_CATEG),
+    INDEX idx_activo (ACTIVO)
+);
+
+CREATE TABLE IF NOT EXISTS PRODUCTOS (
+	ID_PRODUCT INT AUTO_INCREMENT COMMENT 'Identificador unico producto',
+    NOMBRE VARCHAR(255) NOT NULL COMMENT 'Nombre del producto',
+    DESCRIPCION TEXT COMMENT 'Descripcion del producto',
+    COTIZABLE TINYINT COMMENT 'Flag, indica si le producto es de cotizacion o no',
+    PRECIO DECIMAL(10, 2) COMMENT 'Precio del producto',
+    STOCK INT DEFAULT 0 COMMENT 'Unidades disponibles del producto',
+    AUTORIZADO BOOLEAN DEFAULT FALSE COMMENT 'TRUE cuando se autoriza el producto',
+    AUTORIZADO_BY VARCHAR(255) NULL COMMENT 'Aministrador que autorizo el producto',
+    VALORACION DECIMAL(2,1) DEFAULT 0.0 COMMENT 'Calificacion del producto 1-5',
+    FECHA_CREACION DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creacion producto',
+    FECHA_MODIFICACION DATETIME COMMENT 'Fecha de modificacion producto',
+    ACTIVO BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica producto',
+    VENDEDOR VARCHAR(24) NOT NULL COMMENT 'Usuario que publica el producto',
+    CATEGORIA INT NULL COMMENT 'Categoria del producto',
+    
+    PRIMARY KEY (ID_PRODUCT),
+    FOREIGN KEY (VENDEDOR) REFERENCES USUARIOS(CORREO),
+    FOREIGN KEY (AUTORIZADO_BY) REFERENCES USUARIOS(CORREO),
+    
+    
+    INDEX idx_listado (AUTORIZADO),
+    INDEX idx_activo (ACTIVO),
+    INDEX idx_nombre (NOMBRE),
+    INDEX idx_autor (VENDEDOR)
+);
+
+-- COMO HACR QUE PERTENEZCA AL MENOS A UNA CATEGORIA
+CREATE TABLE IF NOT EXISTS CATEGORIAS_PRODUCTOS(
+	CATEG_ASIG INT NOT NULL COMMENT 'ID de categoria asiganda al producto',
+	PRODUC_ASIG INT NOT NULL COMMENT 'ID de categoria asiganda al producto',
+    
+	PRIMARY KEY (CATEG_ASIG,PRODUC_ASIG),
+	FOREIGN KEY (CATEG_ASIG) REFERENCES CATEGORIAS(ID_CATEG),
+	FOREIGN KEY (PRODUC_ASIG) REFERENCES PRODUCTOS(ID_PRODUCT)
+);
+
+CREATE TABLE LISTAS(
+	ID_LIST INT AUTO_INCREMENT COMMENT 'Numero de serie lista',
+    NOMBRE VARCHAR(255) NOT NULL COMMENT 'Nombre de la lista',
+    DESCRIPCION TEXT NULL COMMENT 'Descripcion de la lista',
+    PUBLICA BOOLEAN DEFAULT TRUE NOT NULL COMMENT 'True lista es visible para otros usuarios, false lista privada', 
+	FECHA_CREATION DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creacion lista',
+    ACTIVO BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica lista',
+    AUTOR VARCHAR(24) NOT NULL COMMENT 'Usuario que creo la lista',
+    
+    PRIMARY KEY (ID_LIST),
+    FOREIGN KEY (AUTOR) REFERENCES USUARIOS(CORREO),
+    
+    INDEX idx_activo (ACTIVO)
+);
+
+CREATE TABLE ITEMSLIST(
+	ID_ITEM INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Serializacion item',
+	FECHA_ADD DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha en la que se agrego el item',
+    ACTIVO_ITEMLIST BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica item',
+    LISTA_ITEMLIST INT COMMENT 'Lista a la que pertenece el item',
+    PRODUCTO_ITEMLIST INT COMMENT 'Producto convertido en item de la lista',
+    
+    FOREIGN KEY (LISTA_ITEMLIST) REFERENCES LISTAS(ID_LIST),
+    FOREIGN KEY (PRODUCTO_ITEMLIST) REFERENCES PRODUCTOS(ID_PRODUCT),
+    
+    INDEX idx_activo (ACTIVO_ITEMLIST)
+);
+
+CREATE TABLE CARRITOS(
+	ID_CART INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Serializacion carrito',
+	PRECIOTOTAL DECIMAL COMMENT 'Precio total del carrito',
+    TOTAL_PRODUCTOS INT COMMENT 'Cantidad de productos total del carrito',
+    ACTIVO BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica', 
+	USUARIO_CART VARCHAR(50) NOT NULL COMMENT 'Usuario al que pertenece el carrito',
+    
+    FOREIGN KEY (USUARIO_CART) REFERENCES USUARIOS(CORREO)
+    
+);
+
+DROP TABLE ITEMSCARRITO;
+
+CREATE TABLE ITEMSCARRITO(
+	ID_ITEMCART INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Serializacion del carrito',
+	CANTIDAD_ITEMCART INT COMMENT 'Cantidad total del producto',
+    CART_ITEMCART INT COMMENT 'Carrito al que pertenece el item',
+    ACTIVO BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica',
+    PRODUCTO_ITEMCART INT COMMENT 'Producto que se asigno al carrito',
+    
+    FOREIGN KEY (CART_ITEMCART) REFERENCES CARRITOS(ID_CART),
+    FOREIGN KEY (PRODUCTO_ITEMCART) REFERENCES PRODUCTOS(ID_PRODUCT)
+);

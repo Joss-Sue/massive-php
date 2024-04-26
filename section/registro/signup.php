@@ -1,23 +1,10 @@
 <?php 
 $titlename = "Registrarme";
 $stylename = "singup.css"; 
-include('../../templates/cabecera.php')
+include('../../templates/cabecera.php');
+require_once("../../templates/nav.php");
 ?>
-    <nav>
-        <div class="header">
-            <div class="one-col"></div>
-            <div class="two col name-page">
-                <img src="./../Massive.svg" alt="">
-                <span class="bebas white-text">MASSIVE</span>
-            </div>
-            <div class="six-col"></div>
-            <div class="two col cart-user">
-                <img src="./../cart.svg" alt="">
-                <img src="./../user.svg" alt="">
-            </div>
-            <div class="one-col"></div>
-        </div>
-    </nav>
+    
     <section class="signup-body">
         <div class="container">
             <div class="row">
