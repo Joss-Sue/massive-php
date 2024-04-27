@@ -1,32 +1,38 @@
-.signup-body{
-    background-color: #EDF6F9;
-    height: 90vh;
+.signup-body {
+  background-color: #EDF6F9;
+  height: 90vh;
+}
+.signup-body .form-container {
+  text-align: center;
+}
+.signup-body .form-container h1 {
+  font-size: 80px;
+  margin: 50px 0px 30px 0px;
+}
+.signup-body .form-container form input {
+  width: 30vw;
+  margin-bottom: 15px;
+}
+.signup-body .form-container form button {
+  width: 15vw;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.signup-body .form-container form .seller-checkbox {
+  margin: 0px 0px 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.signup-body .form-container form .seller-checkbox input {
+  width: 1vw;
+  margin: 0px 5px 0px 0px;
+  accent-color: #006D77;
+}
+.signup-body .form-container span a {
+  text-decoration: none;
+  color: #006D77;
 }
 
-.signup-body h1{
-    font-size: 80px;
-    margin: 50px 0px 30px 0px;
-}
-
-.signup-body .form-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.signup-body .form-container form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.signup-body .form-container form input{
-    width: 30vw;
-    margin-bottom: 15px;
-}
-
-.signup-body form button{
-    width: 15vw;
-    font-size: 30px;
-    margin-bottom: 10px;
-}
+/*# sourceMappingURL=signup.css.map */

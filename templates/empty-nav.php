@@ -7,18 +7,8 @@
                     <span class="bebas white-text">MASSIVE</span>
                 </div>
                 <div class="col-6 search-bar">
-                    <span>
-                        <input type="text" name="" id="" placeholder="Busca algún producto">
-                        <a href=""><img src="../../src/icons/mag-glass.svg" alt=""></a>
-                    </span>
                 </div>
                 <div class="col-3 cart-user">
-                    <a href="../../config/cerrarSesion.php">
-                        <img src="../../src/icons/cart.svg" alt="">
-                    </a>
-                    <a href="../userprofile/userprofile.php">
-                        <img src="../../src/icons/user.svg" alt="">
-                    </a>
                 </div>
             </div>
         </div>
@@ -40,4 +30,5 @@
             </div>
         </div>
     </section>
+    
 </nav>
