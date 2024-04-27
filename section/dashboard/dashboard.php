@@ -2,8 +2,22 @@
     require("../../config/sessionVerif.php");
     $titlename = "Massive-Home";
     $stylename = "home.css";
+   
     require_once("../../templates/cabecera.php");
-    require_once("../../templates/nav.php");
+    switch($_SESSION['usuario_tipo']){
+        case 0:
+            require_once("../../templates/nav.php");
+            break;
+        case 1:
+            require_once("../../templates/nav.php");
+            break;
+        case 2:
+            require_once("../../templates/nav.php");
+            break;
+        default:
+            header("Location:../login/login.php");
+            break;
+    }
     
  ?>
     

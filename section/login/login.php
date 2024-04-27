@@ -16,7 +16,7 @@ include('../../templates/cabecera.php')
                         <input class="input-massive" type="password" name="contrasena" id="contrasena" placeholder="Contraseña">
                         <button type="submit" class="button-massive">Ingresar</button>
                     </form>
-                    <span class="inter">¿No tienes una cuenta?, <a href="">¡Registrate!</a></span>
+                    <span class="inter">¿No tienes una cuenta?, <a href="../registro/signup.php">¡Registrate!</a></span>
                 </div>
                 <div class="col-5"></div>
             </div>

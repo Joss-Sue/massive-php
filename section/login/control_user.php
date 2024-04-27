@@ -70,8 +70,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if($contrasena == $usuario["pass"]){
         
         $_SESSION['usuario_id']=$usuario["iduser"];
+        
         //$_SESSION['correo']=$usuarios["CORREO"];
         $_SESSION['usuario_nombre']=$usuario["nombreuser"];
+        $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
+        /*echo'<script type="text/javascript">
+        alert("'.$_SESSION['usuario_tipo'].'");
+        </script>';*/
         //echo $_SESSION['usuario_nombre'];
         //echo $_SESSION['usuario_id'];
         //header('Location: index.php');
