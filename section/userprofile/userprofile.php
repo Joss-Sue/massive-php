@@ -1,6 +1,7 @@
 <?php // /massive/src/icons/
     $titlename = "Perfil";
     $stylename = "user-profile.css";
+    $javascript = "";
     include("/xampp/htdocs/massive/templates/cabecera.php");
  ?>
 

@@ -3,7 +3,9 @@
     $titlename = "Iniciar Sesion";
     $stylename = "login.css"; 
     include('../../templates/cabecera.php');
-    include('../../templates/empty-nav.php')
+    include('../../templates/empty-nav.php');
+    $javascript = '';
+
 ?>
 
     <section class="login-body">

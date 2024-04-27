@@ -12,22 +12,26 @@
         $auxUser->correo=(isset($_POST['correo']))?$_POST['correo']:null;
         $auxUser->contrasena=(isset($_POST['contrasena']))?$_POST['contrasena']:null;
         $auxUser->nombre=(isset($_POST['nombre']))?$_POST['nombre']:null;
-        $auxUser->tipoUsuario=($_POST['vendedor']=="true")?1:2;
-       
+        
     
         if(empty($auxUser->correo) || empty($auxUser->contrasena) || empty($auxUser->nombre)){
             echo "debe llenar los campos";
             return;
         }
+        $auxUser->tipoUsuario=($_POST['vendedor']=="true")?1:2;
+
 
         if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $auxUser->contrasena)) {
+            echo '<script>alert("validacion pass")</script>;';
             echo "La contraseña debe tener un mínimo de 8 caracteres, una mayúscula, una 
             minúscula, un número y un carácter especial";
             return;
         }
-    
+
         $userAssoc = json_decode(json_encode($auxUser), true);
+        
     
+        
         $sqlInsert = 'INSERT INTO usuarios (correo,pass,nombreuser,tipo_usuario)
          VALUES (:correo,:contrasena,:nombre,:tipoUsuario)';
     
@@ -36,4 +40,34 @@
         header("location:../login/login.php");
     }
 
+    /*
+        // Prepara la consulta
+        $consulta = $conexion->prepare("INSERT INTO tabla (blob_columna) VALUES (?)");
+
+        // Comprueba si la consulta se preparó correctamente
+        if ($consulta === false) {
+            die("Error: " . $conexion->error);
+        }
+
+        // Abre el archivo
+        $archivo = fopen('ruta/al/archivo', 'rb');
+
+        // Vincula los parámetros
+        $consulta->bind_param('b', $archivo);
+
+        // Ejecuta la consulta
+        $consulta->execute();
+
+        if ($consulta->affected_rows == 1) {
+            echo "El BLOB se guardó correctamente.";
+        } else {
+            echo "No se pudo guardar el BLOB.";
+        }
+
+        // Cierra la consulta y la conexión
+        $consulta->close();
+        $conexion->close();
+    */
+
 ?>
+

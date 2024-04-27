@@ -1,9 +1,11 @@
-<?php 
+<?php
+    include "./apiControl.php";
     include "./controllerRegistro.php";
     $titlename = "Registrarme";
     $stylename = "signup.css"; 
     include('../../templates/cabecera.php');
     include('../../templates/empty-nav.php');
+    $javascript = '';
 ?>
     
 <section class="signup-body">
@@ -19,6 +21,8 @@
                         <input type="checkbox" name="vendedor" value="true"><br>
                         <label> Soy vendedor</label>
                     </div>
+                    <input class="input-massive" type="text" name="nombre" id="zipcode" placeholder="Codigo postal"><br>
+                    <textarea name="textoapi" id="textoapi" cols="50" rows="6"></textarea>
                     <!--input class="input-massive" type="text" name="nombre" id="" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Fecha de Nacimiento">
                     <input class="input-massive" type="password" name="tipo" id="" placeholder="Contraseña"-->
                     <button type="submit" class="button-massive">Registrate</button>

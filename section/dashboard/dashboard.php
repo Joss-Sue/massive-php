@@ -2,6 +2,7 @@
     require("../../config/sessionVerif.php");
     $titlename = "Massive-Home";
     $stylename = "home.css";
+    $javascript = "";
    
     require_once("../../templates/cabecera.php");
     switch($_SESSION['usuario_tipo']){
