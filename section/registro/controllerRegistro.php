@@ -19,6 +19,12 @@
             echo "debe llenar los campos";
             return;
         }
+
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $auxUser->contrasena)) {
+            echo "La contraseña debe tener un mínimo de 8 caracteres, una mayúscula, una 
+            minúscula, un número y un carácter especial";
+            return;
+        }
     
         $userAssoc = json_decode(json_encode($auxUser), true);
     

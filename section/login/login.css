@@ -12,6 +12,7 @@
 .login-body .form-image-container .image-section img {
   max-width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .login-body .form-image-container .form-section {
   background-color: #E4E4E4;
