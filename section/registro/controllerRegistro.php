@@ -12,13 +12,21 @@
         $auxUser->correo=(isset($_POST['correo']))?$_POST['correo']:null;
         $auxUser->contrasena=(isset($_POST['contrasena']))?$_POST['contrasena']:null;
         $auxUser->nombre=(isset($_POST['nombre']))?$_POST['nombre']:null;
-        
+       
+        /*$auxZip=(isset($_POST['zip']))?$_POST['zip']:null;
+
+        $api = "http://localhost/apirestphp/index.php/?zip=$auxZip";
+        $result= file_get_contents($api);
+        $result = json_decode($result, true);
+
+        print_r($result);*/
+
     
         if(empty($auxUser->correo) || empty($auxUser->contrasena) || empty($auxUser->nombre)){
             echo "debe llenar los campos";
             return;
         }
-        $auxUser->tipoUsuario=($_POST['vendedor']=="true")?1:2;
+        
 
 
         if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $auxUser->contrasena)) {
@@ -27,6 +35,9 @@
             minúscula, un número y un carácter especial";
             return;
         }
+
+        $auxUser->tipoUsuario=($_POST['vendedor']=="true")?1:2;
+        echo '<script>alert("'.$auxUser->tipoUsuario.'")</script>;';
 
         $userAssoc = json_decode(json_encode($auxUser), true);
         

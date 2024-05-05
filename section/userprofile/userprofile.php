@@ -1,8 +1,18 @@
 <?php // /massive/src/icons/
+    session_start();
     $titlename = "Perfil";
     $stylename = "user-profile.css";
     $javascript = "";
-    include("/xampp/htdocs/massive/templates/cabecera.php");
+    include("../../templates/cabecera.php");
+    include("../../templates/nav.php");
+    $tipo = '';
+    if($_SESSION['usuario_tipo']==2){
+        $tipo = "comprador";
+    }else if($_SESSION['usuario_tipo']==1){
+        $tipo= "vendedor";
+    }else{
+        $tipo= "administrador";
+    }
  ?>
 
 <section class="user-profile-body">
@@ -10,7 +20,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8 form-container">
-                    <span class="bebas black"><h1>¡HOLA!,</h1><h2>José Manuel Perez</h2></span>
+                    <span class="bebas black"><h1>¡HOLA!,<?= $tipo ?></h1><h2><?= $_SESSION['usuario_nombre'] ?></h2></span>
                     <form action="">
                         <input class="input-massive" type="text" name="" id="" placeholder="Usuario">
                         <input class="input-massive" type="text" name="" id="" placeholder="Nombre completo">
@@ -24,4 +34,4 @@
         </div>
     </section>
     
-    <?php include("/xampp/htdocs/massive/templates/pie.php"); ?>
+    <?php include("../../templates/pie.php"); ?>
