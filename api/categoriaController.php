@@ -1,8 +1,6 @@
 <?php
 include "../models/categoriasModel.php";
 session_start();
-$isFill=(isset($_COOKIE['correo']))?true:false;
-
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -19,7 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 }
             }else{
                 //echo $_GET['tipo_categoria'];
-                $categoriaRespuesta = CategoriaClass::buscarAllCategorias($_GET['tipoCategoria']);
+                $categoriaRespuesta = CategoriaClass::buscarAllCategorias();
                 if($categoriaRespuesta==null){
                     echo "entre a if tipo_categoria";
                     http_response_code(400);
@@ -37,18 +35,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $data = json_decode(file_get_contents('php://input'), true);
 
-                $nombre= (isset($data['nombre']))?$data['nombre']:null;
+               /* $nombre= (isset($data['nombre']))?$data['nombre']:null;
                 $descripcion= (isset($data['descripcion']))?$data['descripcion']:null;
-                $createdBy= (isset($data['createdBy']))?$data['createdBy']:null;
-                $tipoCategoria=(isset($data['tipoCategoria']))?$data['tipoCategoria']:null;
+                $createdBy= (isset($data['createdBy']))?$data['createdBy']:null;*/
+                extract($data);
+                
                 //var_dump($data);
                 //var_dump($createdBy);
-                if(empty($nombre) || empty($descripcion) || empty($createdBy) || empty($tipoCategoria)){
+                if(empty($nombre) || empty($descripcion) || empty($createdBy)){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
                 }
 
-                $resultadoFuncion = CategoriaClass::registrarCategoria($nombre, $descripcion, $createdBy, $tipoCategoria);
+                $resultadoFuncion = CategoriaClass::registrarCategoria($nombre, $descripcion, $createdBy);
 
                if ($resultadoFuncion[0]){
                 http_response_code(200);

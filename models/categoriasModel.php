@@ -10,17 +10,16 @@ class CategoriaClass{
         self::$conexion = BD::crearInstancia();
     }
 
-    static function registrarCategoria($nombre, $descripcion, $createdBy, $tipoCategoria){
+    static function registrarCategoria($nombre, $descripcion, $createdBy){
         self::inicializarConexion();
         
         try{
-        $sqlInsert="insert into categorias (nombre, descripcion, tipo_categoria, usuarioMod) values (:nombre, :descripcion, :tipoCategoria, :createdBy);";
+        $sqlInsert="insert into categorias (nombre, descripcion, usuarioMod) values (:nombre, :descripcion, :createdBy);";
         $consultaInsert= self::$conexion->prepare($sqlInsert);
         $consultaInsert->execute(array(
         ':nombre'=>$nombre,
         ':descripcion'=>$descripcion,
-        ':createdBy'=>$createdBy,
-        ':tipoCategoria'=>$tipoCategoria
+        ':createdBy'=>$createdBy
         ));
 
         return array(true,"insertado con exito");
@@ -97,12 +96,12 @@ class CategoriaClass{
         }
     }
 
-    static function buscarAllCategorias($tipoCategoria ){
+    static function buscarAllCategorias(){
         
         self::inicializarConexion();
-        $sql="select * from categorias where tipo_categoria=:tipoCategoria";
+        $sql="select * from categorias where activo=1";
         $sentencia = self::$conexion-> prepare($sql);
-        $sentencia -> execute(['tipoCategoria'=>$tipoCategoria]);
+        $sentencia -> execute();
         
     
         $categorias = $sentencia->fetchAll(PDO::FETCH_ASSOC);

@@ -7,7 +7,7 @@ class BD{
         if (!isset(self::$instancia) ){
             $opciones[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
             self::$instancia = new PDO('mysql:host=localhost;dbname=demo_v1','root', '1024', $opciones );
-            echo "conectado";
+            //echo "conectado";
         }
         return self::$instancia;
 

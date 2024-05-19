@@ -5,12 +5,19 @@ use demo_v1;
 create table usuarios(
 iduser int auto_increment primary key,
 correo varchar(255),
-pass varchar(255),
-nombreuser varchar(255),
-tipo_usuario tinyint
+contrasena varchar(255),
+nombre varchar(255),
+direccion varchar(255),
+tipo_usuario varchar(10),
+activo boolean default 1,
+fecha_ingreso timestamp default current_timestamp
 );
 
-insert into usuarios (correo, pass, nombreuser, tipo_usuario) values ('perro@animal.com', '123', 'DOG', 2);
-
-
-select * from usuarios;
+create table categorias(
+id int auto_increment primary key,
+nombre varchar(255),
+descripcion text,
+usuarioMod int,
+activo boolean default 1,
+ FOREIGN KEY (usuarioMod) REFERENCES usuarios(iduser)
+);
