@@ -26,8 +26,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
                 }
-            }elseif (isset($_GET["admin"==true])){
-                $productosRespuesta = ProductoClass::buscarProductoByID($_GET['id']);
+            }elseif (isset($_GET["admin"==true])){//arreglar usando headers
+                $productosRespuesta = ProductoClass::buscarAllProductosAdmin($_GET['id']);
                 if($productosRespuesta==null){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));

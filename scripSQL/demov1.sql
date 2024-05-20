@@ -3,23 +3,23 @@ create database demo_v1;
 use demo_v1;
 
 create table usuarios(
-iduser int auto_increment primary key,
-correo varchar(255),
-contrasena varchar(255),
-nombre varchar(255),
-direccion varchar(255),
-tipo_usuario varchar(10),
-activo boolean default 1,
-fecha_ingreso timestamp default current_timestamp
+    iduser int auto_increment primary key,
+    correo varchar(255),
+    contrasena varchar(255),
+    nombre varchar(255),
+    direccion varchar(255),
+    tipo_usuario varchar(10),
+    activo boolean default 1,
+    fecha_ingreso timestamp default current_timestamp
 );
 
 create table categorias(
-id int auto_increment primary key,
-nombre varchar(255),
-descripcion text,
-usuarioMod int,
-activo boolean default 1,
- FOREIGN KEY (usuarioMod) REFERENCES usuarios(iduser)
+    id int auto_increment primary key,
+    nombre varchar(255),
+    descripcion text,
+    usuarioMod int,
+    activo boolean default 1,
+    FOREIGN KEY (usuarioMod) REFERENCES usuarios(iduser)
 );
 
 CREATE TABLE productos (
@@ -38,3 +38,61 @@ CREATE TABLE productos (
      FOREIGN KEY (categoriaProd) REFERENCES categorias(id),
      FOREIGN KEY (vendedorProd) REFERENCES usuarios(iduser)
     );
+
+CREATE TABLE carritos(
+	idCart INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Serializacion carrito',
+    activoCart BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica', 
+	usuarioCart int unique NOT NULL COMMENT 'Usuario al que pertenece el carrito',
+    totalItems int default 0 comment 'Contiene el total de items del carrito del usuario',
+    foreign key (usuarioCart) references usuarios(iduser)
+    );
+
+    DELIMITER //
+	CREATE TRIGGER after_user_insert
+	AFTER INSERT
+		ON usuarios FOR EACH ROW
+	BEGIN
+		INSERT INTO carritos(usuarioCart) VALUES (NEW.iduser);
+	END;
+	//
+    DELIMITER ;
+
+    create table productosCarrito(
+    idProdCarrito int auto_increment primary key comment 'Llave primaria del item',
+    productoID int,
+    cantidad int comment 'Cantidad de productos requeridos',
+    idCarrito int comment'Llave foreana al carrito al que pertenece',
+    activo boolean default 1 comment 'Borrado logico',
+    foreign key (productoID) references productos(idProd),
+    foreign key (idCarrito) references carritos(idCart)
+    );
+
+    DELIMITER //
+    CREATE TRIGGER after_itemcarrito_insert
+    AFTER INSERT
+    ON productosCarrito FOR EACH ROW
+    BEGIN
+       UPDATE carritos
+       SET totalItems = (SELECT COUNT(*) FROM productosCarrito where idCarrito = NEW.idCarrito and activo = 1 ) where idCart = NEW.idCarrito;
+    END;
+    //
+    DELIMITER ;
+    
+
+    DELIMITER //
+    CREATE PROCEDURE ActualizarInsertarCarrito(
+        IN param_idCarrito INT,
+        IN param_Cantidad INT,
+        IN param_carritoProduc INT
+    )
+    BEGIN
+        IF EXISTS (SELECT 1 FROM productosCarrito WHERE productoID = param_carritoProduc and idCarrito = param_idCarrito and activo = 1) THEN
+            UPDATE productosCarrito
+            SET cantidad = cantidad + param_Cantidad
+            WHERE productoID = param_carritoProduc AND idCarrito = param_idCarrito and activo=1;
+        ELSE
+            INSERT INTO productosCarrito(idCarrito, cantidad, productoID)
+            VALUES(param_idCarrito, param_Cantidad, param_carritoProduc);
+        END IF;
+    END //
+    DELIMITER ;
