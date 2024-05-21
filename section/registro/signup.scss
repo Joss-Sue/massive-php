@@ -5,21 +5,28 @@ $bone: #E4E4E4;
 
 .signup-body {
 	background-color: $white;
-	height: 90vh;
+    padding: 50px 0px 50px 0px;
 	.form-container {
         text-align: center;
         h1 {
-            font-size: 80px;
-            margin: 50px 0px 30px 0px;
+            font-size: 9vw;
+            margin-bottom: 30px;
+            @media (min-width: 576px){//sm
+                font-size: 6vw;
+            }
         }
 		form {
-			input {
+			input, textarea {
+                font-size: 3vw;
 				width: 30vw;
 				margin-bottom: 15px;
+                @media (min-width: 576px){//sm
+                    font-size: 1vw;
+                }
 			}
             button {
                 width: 15vw;
-                font-size: 30px;
+                font-size: 3vw;
                 margin-bottom: 10px;
             }
     

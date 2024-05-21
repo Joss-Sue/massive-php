@@ -1,21 +1,32 @@
 .signup-body {
   background-color: #EDF6F9;
-  height: 90vh;
+  padding: 50px 0px 50px 0px;
 }
 .signup-body .form-container {
   text-align: center;
 }
 .signup-body .form-container h1 {
-  font-size: 80px;
-  margin: 50px 0px 30px 0px;
+  font-size: 9vw;
+  margin-bottom: 30px;
 }
-.signup-body .form-container form input {
+@media (min-width: 576px) {
+  .signup-body .form-container h1 {
+    font-size: 6vw;
+  }
+}
+.signup-body .form-container form input, .signup-body .form-container form textarea {
+  font-size: 3vw;
   width: 30vw;
   margin-bottom: 15px;
 }
+@media (min-width: 576px) {
+  .signup-body .form-container form input, .signup-body .form-container form textarea {
+    font-size: 1vw;
+  }
+}
 .signup-body .form-container form button {
   width: 15vw;
-  font-size: 30px;
+  font-size: 3vw;
   margin-bottom: 10px;
 }
 .signup-body .form-container form .seller-checkbox {
