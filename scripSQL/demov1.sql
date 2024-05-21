@@ -34,6 +34,8 @@ CREATE TABLE productos (
     activoProd BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica producto',
     vendedorProd INT NOT NULL COMMENT 'Usuario que publica el producto',
     categoriaProd INT COMMENT 'Categoria del producto',
+    calificacionPromedio DECIMAL(5,2) DEFAULT 0.00 COMMENT 'Calificacion promedio del producto',
+    ventasTotales INT COMMENT 'Ventas totales que ha tenido el producto',
     
      FOREIGN KEY (categoriaProd) REFERENCES categorias(id),
      FOREIGN KEY (vendedorProd) REFERENCES usuarios(iduser)
@@ -77,7 +79,7 @@ CREATE TABLE carritos(
     END;
     //
     DELIMITER ;
-    
+
 
     DELIMITER //
     CREATE PROCEDURE ActualizarInsertarCarrito(
@@ -96,3 +98,38 @@ CREATE TABLE carritos(
         END IF;
     END //
     DELIMITER ;
+
+CREATE TABLE comentarios_valoraciones (
+	id INT PRIMARY KEY AUTO_INCREMENT COMMENT "Id del comentario con su respectiva valoracion",
+    comentario TEXT COMMENT "Comentario del producto",
+    valoracion DECIMAL(5,2) COMMENT "Valoracion del usuario del producto",
+    idProdVal INT COMMENT "Llave foranea que contiene la referencia al producto",
+    idUsuarioVal INT COMMENT "Llave foranea que contiene la referencia al usuario que realiza la valoracion",
+    fechaValoracion TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "fecha de la valoracion",
+    activo BOOLEAN DEFAULT TRUE COMMENT "Borrado logico",
+    
+    foreign key (idProdVal) references productos(idProd),
+    foreign key (idUsuarioVal) references usuarios(iduser)
+);
+
+DELIMITER //
+CREATE TRIGGER actualizar_promedio
+AFTER INSERT ON comentarios_valoraciones
+FOR EACH ROW
+BEGIN
+    DECLARE total INT;
+    DECLARE sumatoria DECIMAL(5,2);
+    DECLARE promedio DECIMAL(5,2);
+
+    SELECT COUNT(*), SUM(valoracion) INTO total, sumatoria
+    FROM comentarios_valoraciones
+    WHERE idProdVal = NEW.idProdVal;
+
+    SET promedio = sumatoria / total;
+
+    UPDATE productos
+    SET calificacionPromedio = promedio
+    WHERE idProd = NEW.idProdVal;
+END;//
+DELIMITER ;
+
