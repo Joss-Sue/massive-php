@@ -15,6 +15,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 UsuarioClass::matchLoginCookie($correo, $contrasena);
 
             }*/
+            //http://localhost/massivedemo/api/UsuariosController.php/?id=1
             if (isset($_GET['id'])) {
                 $usuarioRespuesta=UsuarioClass::buscarUsuarioByID($_GET['id']);
                 if(UsuarioClass::buscarUsuarioByID($_GET['id'])==null){
@@ -47,12 +48,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
              
             }else{
                 //ejemplo json {"correo": "gato@animal.com","contrasena": "123","nombre": "CAT","tipoUsuario":"vendedor","direccion":"calle 123"}
-                /*$correo=(isset($data['correo']))?$data['correo']:null;
-                $contrasena=(isset($data['contrasena']))?$data['contrasena']:null;
-                $nombre= (isset($data['nombre']))?$data['nombre']:null;
-                $tipoUsuario= (isset($data['tipo_usuario']))?$data['telefono']:null;
-                $direccion= (isset($data['direccion']))?$data['direccion']:null;*/
-                //var_dump($data);
+                
                 extract($data);
 
                 if(empty($correo) || empty($contrasena) || empty($nombre) || empty($tipoUsuario) || empty($direccion))
@@ -73,12 +69,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             //ejemplo json {"id":"3","correo": "gato@animal.com","contrasena": "234","nombre": "CAT","direccion":"calle 123"}
             $data = json_decode(file_get_contents('php://input'), true);
-            /*$id = (isset($data['id']))?$data['id']:null;
-            $correo = (isset($data['correo']))?$data['correo']:null;
-            $contrasena=(isset($data['contrasena']))?$data['contrasena']:null;
-            $nombre= (isset($data['nombre']))?$data['nombre']:null;
-            $telefono= (isset($data['telefono']))?$data['telefono']:null;
-            $direccion= (isset($data['direccion']))?$data['direccion']:null;*/
+            
             extract($data);
 
             if(empty($correo) || empty($contrasena) || empty($id || empty($nombre) || empty($direccion))){

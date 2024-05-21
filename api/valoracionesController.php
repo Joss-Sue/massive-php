@@ -1,15 +1,15 @@
 <?php
-include "../models/productosCarritoModel.php";
+include "../models/valoracionesModel.php";
 session_start();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         {
-            //http://localhost/massivedemo/api/productosController.php/?idCarrito=1
-            $productosRespuesta = ProductosCarritoClass::buscarAllProductos($_GET['idCarrito']);
+            //http://localhost/massivedemo/api/valoracionesController.php/?idProdVal=3
+            $productosRespuesta = ValoracionesClass::buscarAllProductos($_GET['idProdVal']);
                 if($productosRespuesta==null){
                     http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => "ningun producto en el carrito encontrado"));
+                    echo json_encode(array("status" => "error", "message" => "ninguna valoracion encontrada"));
                 }else{
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
@@ -18,18 +18,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'POST':
         {
-            /*ejemplo json{"productoID":1, "cantidad":3, "idCarrito":"1"}*/
+            /*ejemplo json{"comentario":"que onda","valoracion":4,"idProdVal":3,"idUsuarioVal":2}*/
 
             $data = json_decode(file_get_contents('php://input'), true);
 
                 extract($data);
                 
-                if(empty($productoID) || empty($cantidad) || empty($idCarrito)){
+                if(empty($comentario) || empty($valoracion) || empty($idProdVal)||empty($idUsuarioVal)){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
                 }
 
-                $resultadoFuncion = ProductosCarritoClass::registrarProducto($idCarrito,$cantidad,$productoID);
+                $resultadoFuncion = ValoracionesClass::registrarProducto($comentario,$valoracion, $idProdVal,$idUsuarioVal);
 
                if ($resultadoFuncion[0]){
                 http_response_code(200);
@@ -43,24 +43,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
             
     case 'PUT':
         {
-            /*ejemplo json [{"id":1,"cantidad":2},{"id":2, "cantidad":1},{},..]*/
-            $dataArray = json_decode(file_get_contents('php://input'), true);
-            foreach($dataArray as $data) {
+            /*ejemplo json{"comentario":"que onda","valoracion":4,"id":4}*/
+            $data = json_decode(file_get_contents('php://input'), true);
+
                 extract($data);
                 
-                if(empty($cantidad)||empty($id)){
+                if(empty($comentario)||empty($id)||empty($valoracion)){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
                    exit;
                 }
 
-                $resultadoFuncion = ProductosCarritoClass::editarProducto($id,$cantidad);
+                $resultadoFuncion = ValoracionesClass::editarProducto($id ,$comentario, $valoracion);
                 if ($resultadoFuncion[0]==false){
                     http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => "error al actualizar un producto del carrito" . $resultadoFuncion[1]));
+                    echo json_encode(array("status" => "error", "message" => "error al actualizar la valoracion" . $resultadoFuncion[1]));
                     exit;
                 }
-            }
                 http_response_code(200);
                 echo json_encode(array("status" => "success", "message" => "actualizado con exito"));
                 break;
@@ -78,7 +77,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 exit;
             }
 
-            $resultadoFuncion = ProductosCarritoClass::eliminarProducto($data['id']);
+            $resultadoFuncion = ValoracionesClass::eliminarProducto($data['id']);
             if ($resultadoFuncion[0]){
                 http_response_code(200);
                 echo json_encode(array("status" => "success", "message" => $resultadoFuncion[1]));
