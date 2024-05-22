@@ -7,28 +7,11 @@ session_start();
 switch ($_SERVER['REQUEST_METHOD']) {
     
     case 'GET':
-        {
-                if (isset($_GET['id']) || isset($_GET['tipo'])) {
-                    //$id = intval($_GET['id']);
-                    //$tipo = $_GET['tipo'];
-                    $conexion=BD::crearInstancia();
-                    $contarRespuesta=contarFilasByID($_GET['tipo'],$_GET['id'], $conexion);
-                    if($contarRespuesta==null){
-                        http_response_code(400);
-                        echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
-                        exit;
-                        break;
-                    }else{
-                        http_response_code(200);
-                        echo json_encode($contarRespuesta);
-                        break;
-                    }
-            
-
-                }elseif (isset($_GET['tipo'])) {
+        {       //siempre mandar id, si es funcion que no lo necesita mandar 0
+                if (isset($_GET['tipo']) && isset($_GET['id'])) {
 
                      $conexion=BD::crearInstancia();
-                    $contarRespuesta=contarFilas($_GET['tipo'],$conexion);
+                    $contarRespuesta=contarFilas($_GET['tipo'],$conexion,$_GET['id']);
                     if($contarRespuesta==null){
                         http_response_code(400);
                         echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
@@ -39,11 +22,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         break;
                     }       
                 }
-                
-
         }
-    
-        
     
     default:
         http_response_code(405);
@@ -52,38 +31,30 @@ switch ($_SERVER['REQUEST_METHOD']) {
 }
 
 
-function contarFilas($tipo,$conexion){
+function contarFilas($tipo,$conexion,$id){
         
-   
-    $arraySentencias=array("productosByAll"=>"select count(*) as filas from productos where activoProd = 1",
-                            "productosByAllAdmin"=>"select count(*) as filas from productos where activoProd = 1 and estaListadoProd = 0",
-                            );
-    $sentencia = $conexion-> prepare($arraySentencias["$tipo"]);
+    if($id==0){
+    if($tipo=="productosByAll"){
+        $sentenciaIf="select count(*) as filas from productos where activoProd = 1";
+    }elseif ($tipo=="productosByAllAdmin") {
+        $sentenciaIf="select count(*) as filas from productos where activoProd = 1 and estaListadoProd = 0";
+    }
+    var_dump($sentenciaIf) ;
+    $sentencia = $conexion-> prepare($sentenciaIf);
     $sentencia -> execute([]);
 
     $producto = $sentencia->fetch(PDO::FETCH_ASSOC);
-    
-
-    if(!$producto) {
-       return null;
     }else{
-        return $producto;
+        if($tipo=="productosByVendedor"){
+            $sentenciaIf="select count(*) as filas from productos where vendedorProd = :id";
+    }elseif($tipo=="productosByAdmin"){
+            $sentenciaIf="select count(*) as filas from productos where activoProd = 1 and adminAutoriza = :id";
     }
-}
-
-function contarFilasByID($tipo,$id,$conexion){
-    
-    
-    $arraySentencias=array("productosByVendedor"=>"select count(*) as filas from productos where activoProd = 1 and vendedorProd = :id",
-                            "productosByAdmin"=>"select count(*) as filas from productos where activoProd = 1 and adminAutoriza = :id",
-                            );
-    //$sqlSelect = "select count(*) as filas from productos where activoProd = 1 and vendedorProd = :id";
-    $sentencia = $conexion-> prepare($arraySentencias[$tipo]);
+    $sentencia = $conexion-> prepare($sentenciaIf);
     $sentencia->bindValue(':id', $id, PDO::PARAM_INT);
     $sentencia -> execute();
-
     $producto = $sentencia->fetch(PDO::FETCH_ASSOC);
-    
+    }
 
     if(!$producto) {
        return null;
@@ -91,5 +62,6 @@ function contarFilasByID($tipo,$id,$conexion){
         return $producto;
     }
 }
+
 
 ?>
