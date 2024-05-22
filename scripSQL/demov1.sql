@@ -60,13 +60,14 @@ CREATE TABLE carritos(
     DELIMITER ;
 
     create table productosCarrito(
-    idProdCarrito int auto_increment primary key comment 'Llave primaria del item',
-    productoID int,
-    cantidad int comment 'Cantidad de productos requeridos',
-    idCarrito int comment'Llave foreana al carrito al que pertenece',
-    activo boolean default 1 comment 'Borrado logico',
-    foreign key (productoID) references productos(idProd),
-    foreign key (idCarrito) references carritos(idCart)
+        idProdCarrito int auto_increment primary key comment 'Llave primaria del item',
+        productoID int,
+        cantidad int comment 'Cantidad de productos requeridos',
+        idCarrito int comment'Llave foreana al carrito al que pertenece',
+        activo boolean default 1 comment 'Borrado logico',
+
+        foreign key (productoID) references productos(idProd),
+        foreign key (idCarrito) references carritos(idCart)
     );
 
     DELIMITER //
@@ -139,18 +140,10 @@ CREATE TABLE multimediaProductos (
     ruta VARCHAR(255) COMMENT "Ruta del archivo",
     idProductoMulti INT COMMENT "Producto al cual se hace referencia",
     activo BOOLEAN  DEFAULT 1 COMMENT "Borrado logico",
-    
-DELIMITER //
-CREATE PROCEDURE crearPedido(in param_totalPedido decimal(5,2), in param_idUsario int, out param_last_id int)
-BEGIN
-    -- Primero, insertamos en la primera tabla
-    INSERT INTO pedidos (totalPedido, idUsuarioPedido) VALUES (param_totalPedido, param_idUsario);
+        
+    FOREIGN KEY (idProductoMulti) REFERENCES productos(idProd)
+);
 
-    -- Obtenemos el ID generado por el auto_increment
-    SET param_last_id = LAST_INSERT_ID();
-
-END //
-DELIMITER ;);
 
 CREATE TABLE pedidos(
 	id INT AUTO_INCREMENT PRIMARY KEY COMMENT "Llave primaria de la tabla",
@@ -162,6 +155,18 @@ CREATE TABLE pedidos(
     
     FOREIGN KEY (idUsuarioPedido) REFERENCES usuarios(iduser)
 );
+
+DELIMITER //
+CREATE PROCEDURE crearPedido(in param_totalPedido decimal(5,2), in param_idUsario int, out param_last_id int)
+BEGIN
+    -- Primero, insertamos en la primera tabla
+    INSERT INTO pedidos (totalPedido, idUsuarioPedido) VALUES (param_totalPedido, param_idUsario);
+
+    -- Obtenemos el ID generado por el auto_increment
+    SET param_last_id = LAST_INSERT_ID();
+
+END //
+DELIMITER ;
 
 CREATE TABLE ventas(
 	id INT AUTO_INCREMENT PRIMARY KEY COMMENT "Llave primaria de la tabla",
