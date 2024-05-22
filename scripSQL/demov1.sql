@@ -40,14 +40,18 @@ CREATE TABLE productos (
      FOREIGN KEY (categoriaProd) REFERENCES categorias(id),
      FOREIGN KEY (vendedorProd) REFERENCES usuarios(iduser)
     );
-
+    --Cambio lineas obligatorias
+    alter table productos add column adminAutoriza INT COMMENT 'Administrador que autoriza';
+    ALTER TABLE productos ADD FOREIGN KEY (adminAutoriza) REFERENCES usuarios(iduser);
+    --Cambio lineas obligatorias
+    
 CREATE TABLE carritos(
 	idCart INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Serializacion carrito',
     activoCart BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica', 
 	usuarioCart int unique NOT NULL COMMENT 'Usuario al que pertenece el carrito',
     totalItems int default 0 comment 'Contiene el total de items del carrito del usuario',
     foreign key (usuarioCart) references usuarios(iduser)
-    );
+);
 
     DELIMITER //
 	CREATE TRIGGER after_user_insert

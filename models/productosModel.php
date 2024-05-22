@@ -1,6 +1,6 @@
 <?php
 include_once '../config/bd_conexion.php';
-
+session_start();
 
 class ProductoClass{
 
@@ -68,6 +68,30 @@ class ProductoClass{
                                 
     }
 
+    static function autorizarAdmin($id, $idAdmin){
+        self::inicializarConexion();
+        $producto = ProductoClass::buscarProductoByID($id);
+        
+    
+        if($producto==null) {
+           return array(false,"error en id");
+        }
+        try{
+            $sqlUpdate="update productos set estaListadoProd = 1, adminAutoriza = :idAdmin where idProd= :id";
+            $sentencia = self::$conexion-> prepare($sqlUpdate);
+            $sentencia -> execute([ ':id'=>$id,
+                                    ':idAdmin'=>$idAdmin
+                                    ]);
+            return array(true,"actualizado con exito");
+        }catch(PDOException $e){
+            return array(false, "Error al editar categoria: " . $e->getMessage());
+        }
+        
+
+        return array(true,"actualizado con exito");
+                                
+    }
+
     static function eliminarProducto($id){
         self::inicializarConexion();
         $categoria = ProductoClass::buscarProductoByID($id);
@@ -105,10 +129,30 @@ class ProductoClass{
         }
     }
 
+    static function contarFilas($sentenciaSQL){
+        
+        self::inicializarConexion();
+        $sentencia = self::$conexion-> prepare($sentenciaSQL);
+        $sentencia -> execute(['id'=>$id]);
+    
+        $producto = $sentencia->fetch(PDO::FETCH_ASSOC);
+        
+    
+        if(!$producto) {
+           return null;
+        }else{
+            return $producto;
+        }
+    }
+
     static function buscarAllProductos($pagina){
         $pagina=($pagina-1)*2;
         self::inicializarConexion();
+        if($_SESSION['tipo_usuario']=="comprador"){
         $sql="select* from productos where activoProd = 1 order by fchCreacionProd desc limit 2 offset :pagina";
+        }elseif($_SESSION['tipo_usuario']=="admin"){
+            $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 2 offset :pagina";
+        }
         $sentencia = self::$conexion-> prepare($sql);
         //$sentencia -> execute([':pagina'=> 2]);
         $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
@@ -124,14 +168,20 @@ class ProductoClass{
         }
     }
 
-    static function buscarAllProductosAdmin($pagina){
+    static function buscarAllProductosVendedorAdmin($pagina){
         $pagina=($pagina-1)*2;
         self::inicializarConexion();
-        $sql="select* from productos where activo Prod = 1 and estaListadoProd = false order by fchCreacionProd desc limit 2 offset :pagina";
+        if($_SESSION['tipo_usuario']=="vendedor"){
+        $sql="select* from productos where activoProd = 1 where vendedorProd = :id order by fchCreacionProd desc limit 2 offset :pagina";
+        }elseif($_SESSION['tipo_usuario']=="admin"){
+            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id";
+        }
         $sentencia = self::$conexion-> prepare($sql);
         //$sentencia -> execute([':pagina'=> 2]);
         $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
-        $sentencia->execute();
+        $sentencia->execute([
+            ':id'=>$_SESSION['usuario_id']
+        ]);
         
     
         $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);

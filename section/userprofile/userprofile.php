@@ -6,9 +6,9 @@
     include("../../templates/cabecera.php");
     include("../../templates/nav.php");
     $tipo = '';
-    if($_SESSION['usuario_tipo']==2){
+    if($_SESSION['usuario_tipo']=="comprador"){
         $tipo = "comprador";
-    }else if($_SESSION['usuario_tipo']==1){
+    }else if($_SESSION['usuario_tipo']=="vendedor"){
         $tipo= "vendedor";
     }else{
         $tipo= "administrador";

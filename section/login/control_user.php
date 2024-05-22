@@ -46,12 +46,12 @@ function matchLogin($correo, $contrasena, $conexion, $isRecordar){
        return false;
     }  
 
-    if($contrasena == $usuario["pass"]){
+    if($contrasena == $usuario["contrasena"]){
         
         $_SESSION['usuario_id']=$usuario["iduser"];
         
         //$_SESSION['correo']=$usuarios["CORREO"];
-        $_SESSION['usuario_nombre']=$usuario["nombreuser"];
+        $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
         /*echo'<script type="text/javascript">
         alert("'.$_SESSION['usuario_tipo'].'");
@@ -91,10 +91,10 @@ function matchLoginCookie($conexion, $correo, $contrasena){
         return;
     }
 
-    if($contrasena == $usuario["pass"]){
+    if($contrasena == $usuario["contrasena"]){
         
         $_SESSION['usuario_id']=$usuario["iduser"];
-        $_SESSION['usuario_nombre']=$usuario["nombreuser"];
+        $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
         setcookie('correo',$correo,time()+3600,"/");
         setcookie('contrasena',$contrasena,time()+3600,"/");

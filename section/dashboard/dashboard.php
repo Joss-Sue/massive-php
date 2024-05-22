@@ -6,13 +6,13 @@
    
     require_once("../../templates/cabecera.php");
     switch($_SESSION['usuario_tipo']){
-        case 0:
+        case "comprador":
             require_once("../../templates/nav.php");
             break;
-        case 1:
+        case "vendedor":
             require_once("../../templates/nav.php");
             break;
-        case 2:
+        case "admin":
             require_once("../../templates/nav.php");
             break;
         default:

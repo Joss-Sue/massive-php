@@ -12,6 +12,7 @@
         $auxUser->correo=(isset($_POST['correo']))?$_POST['correo']:null;
         $auxUser->contrasena=(isset($_POST['contrasena']))?$_POST['contrasena']:null;
         $auxUser->nombre=(isset($_POST['nombre']))?$_POST['nombre']:null;
+        $auxUser->direccion=(isset($_POST['direccion']))?$_POST['direccion']:null;
        
         /*$auxZip=(isset($_POST['zip']))?$_POST['zip']:null;
 
@@ -22,7 +23,7 @@
         print_r($result);*/
 
     
-        if(empty($auxUser->correo) || empty($auxUser->contrasena) || empty($auxUser->nombre)){
+        if(empty($auxUser->correo) || empty($auxUser->contrasena) || empty($auxUser->nombre) || empty($auxUser->direccion)){
             echo "debe llenar los campos";
             return;
         }
@@ -36,15 +37,15 @@
             return;
         }
 
-        $auxUser->tipoUsuario=($_POST['vendedor']=="true")?1:2;
+        $auxUser->tipoUsuario=($_POST['vendedor']=="true")?"vendedor":"comprador";
         echo '<script>alert("'.$auxUser->tipoUsuario.'")</script>;';
 
         $userAssoc = json_decode(json_encode($auxUser), true);
         
     
         
-        $sqlInsert = 'INSERT INTO usuarios (correo,pass,nombreuser,tipo_usuario)
-         VALUES (:correo,:contrasena,:nombre,:tipoUsuario)';
+        $sqlInsert = 'INSERT INTO usuarios (correo,contrasena, nombre,direccion, tipo_usuario)
+         VALUES (:correo,:contrasena,:nombre, :direccion,:tipoUsuario)';
     
         $consultaInsert= $conexion->prepare($sqlInsert);
         $consultaInsert->execute($userAssoc);

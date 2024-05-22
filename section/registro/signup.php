@@ -22,6 +22,7 @@
                         <label> Soy vendedor</label>
                     </div>
                     <input class="input-massive" type="text" name="zip" id="" placeholder="Codigo postal"><br>
+                    <input class="input-massive" type="text" name="direccion" id="" placeholder="Codigo postal"><br>
                     <textarea name="textoapi" id="textoapi" cols="50" rows="6"><?php $result ?></textarea>
                     <!--input class="input-massive" type="text" name="nombre" id="" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Fecha de Nacimiento">
                     <input class="input-massive" type="password" name="tipo" id="" placeholder="Contraseña"-->
