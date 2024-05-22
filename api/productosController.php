@@ -6,9 +6,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         {
             
-            if (isset($_SERVER['HTTP_ACTION'])) {
-
-            }
             //http://localhost/massivedemo/api/productosController.php/?id=2
             if (isset($_GET['id'])) {
                 $productosRespuesta = ProductoClass::buscarProductoByID($_GET['id']);
@@ -51,7 +48,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                 extract($data);
                 
-                if(empty($nombre) || empty($descripcion) || empty($precio)){
+                if(empty($nombre) || empty($descripcion) || empty($precio) || empty($vendedor)){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
                 }

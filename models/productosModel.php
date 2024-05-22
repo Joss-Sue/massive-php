@@ -129,11 +129,35 @@ class ProductoClass{
         }
     }
 
-    static function contarFilas($sentenciaSQL){
+    static function contarFilas($tipo){
         
         self::inicializarConexion();
-        $sentencia = self::$conexion-> prepare($sentenciaSQL);
-        $sentencia -> execute(['id'=>$id]);
+        $arraySentencias=array("productosByAll"=>"select count(*) as filas from productos where activoProd = 1",
+                                "productosByAllAdmin"=>"select count(*) as filas from productos where activoProd = 1 and estaListadoProd = 0",
+                                );
+        $sentencia = self::$conexion-> prepare($arraySentencias["$tipo"]);
+        $sentencia -> execute([]);
+    
+        $producto = $sentencia->fetch(PDO::FETCH_ASSOC);
+        
+    
+        if(!$producto) {
+           return null;
+        }else{
+            return $producto;
+        }
+    }
+
+    static function contarFilasByID($tipo,$id){
+        
+        self::inicializarConexion();
+        $arraySentencias=array("productosByVendedor"=>"select count(*) as filas from productos where activoProd = 1 and vendedorProd = :id",
+                                "productosByAdmin"=>"select count(*) as filas from productos where activoProd = 1 and adminAutoriza = :id",
+                                );
+        //$sqlSelect = "select count(*) as filas from productos where activoProd = 1 and vendedorProd = :id";
+        $sentencia = self::$conexion-> prepare($arraySentencias[$tipo]);
+        $sentencia->bindValue(':id', $id, PDO::PARAM_INT);
+        $sentencia -> execute();
     
         $producto = $sentencia->fetch(PDO::FETCH_ASSOC);
         
@@ -172,9 +196,9 @@ class ProductoClass{
         $pagina=($pagina-1)*2;
         self::inicializarConexion();
         if($_SESSION['tipo_usuario']=="vendedor"){
-        $sql="select* from productos where activoProd = 1 where vendedorProd = :id order by fchCreacionProd desc limit 2 offset :pagina";
+        $sql="select* from productos where vendedorProd = :id order by fchCreacionProd desc limit 2 offset :pagina";
         }elseif($_SESSION['tipo_usuario']=="admin"){
-            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id";
+            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id by fchCreacionProd desc limit 2 offset :pagina";
         }
         $sentencia = self::$conexion-> prepare($sql);
         //$sentencia -> execute([':pagina'=> 2]);
