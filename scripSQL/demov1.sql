@@ -133,3 +133,56 @@ BEGIN
 END;//
 DELIMITER ;
 
+CREATE TABLE multimediaProductos (
+	id INT AUTO_INCREMENT PRIMARY KEY COMMENT "Llave primaria de la tabla",
+    tipoMultimedia VARCHAR(10) COMMENT "Tipo de dato multimedia, video o imagen",
+    ruta VARCHAR(255) COMMENT "Ruta del archivo",
+    idProductoMulti INT COMMENT "Producto al cual se hace referencia",
+    activo BOOLEAN  DEFAULT 1 COMMENT "Borrado logico",
+    
+DELIMITER //
+CREATE PROCEDURE crearPedido(in param_totalPedido decimal(5,2), in param_idUsario int, out param_last_id int)
+BEGIN
+    -- Primero, insertamos en la primera tabla
+    INSERT INTO pedidos (totalPedido, idUsuarioPedido) VALUES (param_totalPedido, param_idUsario);
+
+    -- Obtenemos el ID generado por el auto_increment
+    SET param_last_id = LAST_INSERT_ID();
+
+END //
+DELIMITER ;);
+
+CREATE TABLE pedidos(
+	id INT AUTO_INCREMENT PRIMARY KEY COMMENT "Llave primaria de la tabla",
+    fechaPedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "fecha del pedido",
+    totalPedido DECIMAL (10,5) COMMENT "Precio total del pedido",
+    estatusPedido VARCHAR(25) DEFAULT "En camino" COMMENT "Estatus del pedido",
+    idUsuarioPedido INT COMMENT "Usuario que le pertence el pedido",
+    activo BOOLEAN DEFAULT TRUE COMMENT "Borrado logico",
+    
+    FOREIGN KEY (idUsuarioPedido) REFERENCES usuarios(iduser)
+);
+
+CREATE TABLE ventas(
+	id INT AUTO_INCREMENT PRIMARY KEY COMMENT "Llave primaria de la tabla",
+    articulosTotales int comment "Cantidad total de articulos comprados",
+    idPedido INT COMMENT "Llave foranea al pedido al que pertenece",
+    idProductoVenta int comment "Llave foranea al producto comprado",
+    activo BOOLEAN DEFAULT TRUE COMMENT "Borrado logico",
+    
+    FOREIGN KEY (idPedido) REFERENCES pedidos(id),
+    FOREIGN KEY (idProductoVenta) REFERENCES productos(idProd)
+);
+
+DELIMITER //
+CREATE PROCEDURE insertarVenta(in param_articulosTotales int, in param_idPedido INT,
+    in param_idProductoVenta int)
+BEGIN
+   
+    INSERT INTO ventas (articulosTotales, idPedido, idProductoVenta) VALUES (param_articulosTotales, param_idPedido, param_idProductoVenta);
+
+END //
+DELIMITER ;
+
+
+
