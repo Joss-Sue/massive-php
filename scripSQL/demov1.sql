@@ -44,7 +44,7 @@ CREATE TABLE productos (
     alter table productos add column adminAutoriza INT COMMENT 'Administrador que autoriza';
     ALTER TABLE productos ADD FOREIGN KEY (adminAutoriza) REFERENCES usuarios(iduser);
     --Cambio lineas obligatorias
-    
+
 CREATE TABLE carritos(
 	idCart INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Serializacion carrito',
     activoCart BOOLEAN DEFAULT TRUE COMMENT 'Eliminacion logica', 
@@ -190,6 +190,23 @@ BEGIN
    
     INSERT INTO ventas (articulosTotales, idPedido, idProductoVenta) VALUES (param_articulosTotales, param_idPedido, param_idProductoVenta);
 
+END //
+DELIMITER ;
+
+--datos productosCarrito
+    DELIMITER //
+CREATE PROCEDURE GetProductosCarrito(IN carritoID INT)
+BEGIN
+    SELECT 
+        productosCarrito.cantidad, 
+        productos.nombreProd, 
+        productos.precioProd 
+    FROM 
+        productosCarrito 
+    JOIN 
+        productos ON productosCarrito.productoID = productos.idProd
+    WHERE productosCarrito.idCarrito = carritoID and  activo = 1
+	order by idProdCarrito desc;
 END //
 DELIMITER ;
 
