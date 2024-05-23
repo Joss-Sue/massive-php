@@ -33,12 +33,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json{"nombre":"Audifonos","descripcion":"audifonos de todo tipo","tipoCategoria":"subcategoria","createdBy":2}*/
 
+            $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
+            $createdBy = $_POST['createdBy'];
+
             $data = json_decode(file_get_contents('php://input'), true);
 
                /* $nombre= (isset($data['nombre']))?$data['nombre']:null;
                 $descripcion= (isset($data['descripcion']))?$data['descripcion']:null;
                 $createdBy= (isset($data['createdBy']))?$data['createdBy']:null;*/
-                extract($data);
                 
                 //var_dump($data);
                 //var_dump($createdBy);

@@ -22,42 +22,6 @@ $bone: #E4E4E4;
 .white-text {
 	color: $color_1;
 }
-.one-col {
-	width: 8.3vw;
-}
-.two-col {
-	width: 16.6vw;
-}
-.three-col {
-	width: 25vw;
-}
-.four-col {
-	width: 33.3vw;
-}
-.five-col {
-	width: 41.6vw;
-}
-.six-col {
-	width: 50vw;
-}
-.seven-col {
-	width: 58.3vw;
-}
-.eight-col {
-	width: 66.6vw;
-}
-.nine-col {
-	width: 75vw;
-}
-.ten-col {
-	width: 83.3vw;
-}
-.eleven-col {
-	width: 91.6vw;
-}
-.twelve-col {
-	width: 100vw;
-}
 .cart-button {
 	text-decoration: none;
 	background-color: $massive-blue;
@@ -131,11 +95,9 @@ nav {
 					max-width: 56px;
 				}
 			}
-            a{
-                &:nth-child(2){
-                    margin-left: 15px;
-                }
-            }
+			.cart-icon{
+				margin-right: 15px;
+			}
 		}
 		.search-bar {
 			display: flex;

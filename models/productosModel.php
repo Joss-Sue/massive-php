@@ -193,19 +193,17 @@ class ProductoClass{
     }
 
     static function buscarAllProductosVendedorAdmin($pagina){
-        $pagina=($pagina-1)*2;
+        //$pagina=($pagina-1)*2;
         self::inicializarConexion();
-        if($_SESSION['tipo_usuario']=="vendedor"){
-        $sql="select* from productos where vendedorProd = :id order by fchCreacionProd desc limit 2 offset :pagina";
-        }elseif($_SESSION['tipo_usuario']=="admin"){
-            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id by fchCreacionProd desc limit 2 offset :pagina";
+        if($_SESSION['usuario_tipo']=="vendedor"){
+        $sql="select* from productos where vendedorProd = 1 order by fchCreacionProd desc limit 2 offset 1";
+        }elseif($_SESSION['usuario_tipo']=="admin"){
+            $sql="select * from productos where activoProd = 1 and adminAutoriza = 1 by fchCreacionProd desc limit 2 offset 1";
         }
         $sentencia = self::$conexion-> prepare($sql);
         //$sentencia -> execute([':pagina'=> 2]);
-        $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
-        $sentencia->execute([
-            ':id'=>$_SESSION['usuario_id']
-        ]);
+        //$sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
+        $sentencia->execute();
         
     
         $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);

@@ -1,0 +1,29 @@
+$massive-blue: #006D77;
+
+.categories-body{
+    .add-categories-section{
+        div{
+            div{
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    align-content: space-around;
+                    flex-wrap: wrap;
+                    .add-category{
+                        form{
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                        }
+                    }
+                    button.show-form{
+                        background-color: $massive-blue;
+                        border-radius: 5px;
+                        border: none;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

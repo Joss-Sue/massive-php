@@ -1,6 +1,5 @@
 <?php
 
-    echo "si sirvo :c";
     require_once '../../config/bd_conexion.php';
     require "./modelUsuario.php";
 

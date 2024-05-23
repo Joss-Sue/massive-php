@@ -27,8 +27,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
                 }
-            }elseif (isset($_SESSION["tipo_usuario"]) || $_SESSION["tipo_usuario"]=="vendedor"){//arreglar usando headers
-                $productosRespuesta = ProductoClass::buscarAllProductosVendedorAdmin($_SESSION['tipo_usuario']);
+            }elseif (isset($_SESSION["usuario_tipo"]) || $_SESSION["usuario_tipo"]=="vendedor"){//arreglar usando headers
+                $productosRespuesta = ProductoClass::buscarAllProductosVendedorAdmin($_SESSION['usuario_tipo']);
                 if($productosRespuesta==null){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
@@ -37,6 +37,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     echo json_encode($productosRespuesta);
                 }
             }
+            http_response_code(400);
+            echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
         }
         break;
     case 'POST':

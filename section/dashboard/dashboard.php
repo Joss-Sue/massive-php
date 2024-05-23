@@ -2,7 +2,7 @@
     require("../../config/sessionVerif.php");
     $titlename = "Massive-Home";
     $stylename = "home.css";
-    $javascript = "";
+    $javascript = "script.js";
    
     require_once("../../templates/cabecera.php");
     switch($_SESSION['usuario_tipo']){
@@ -10,10 +10,10 @@
             require_once("../../templates/nav.php");
             break;
         case "vendedor":
-            require_once("../../templates/nav.php");
+            require_once("../../templates/navVendedor.php");
             break;
         case "admin":
-            require_once("../../templates/nav.php");
+            require_once("../../templates/navAdmin.php");
             break;
         default:
             header("Location:../login/login.php");

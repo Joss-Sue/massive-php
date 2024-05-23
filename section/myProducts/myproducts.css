@@ -1,0 +1,19 @@
+.myProducts-body .add-product-section div div div {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.myProducts-body .add-product-section div div div h3 {
+  font-size: 40px;
+}
+.myProducts-body .add-product-section div div div a {
+  text-decoration: none;
+  color: #006D77;
+  font-size: 60px;
+}
+.myProducts-body .add-product-section div div div a i:hover {
+  opacity: 0.8;
+}
+
+/*# sourceMappingURL=myproducts.css.map */

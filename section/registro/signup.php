@@ -1,5 +1,5 @@
 <?php
-    include "./apiControl.php";
+    //include "./apiControl.php";
     include "./controllerRegistro.php";
     $titlename = "Registrarme";
     $stylename = "signup.css"; 
@@ -21,11 +21,7 @@
                         <input type="checkbox" name="vendedor" value="true"><br>
                         <label> Soy vendedor</label>
                     </div>
-                    <input class="input-massive" type="text" name="zip" id="" placeholder="Codigo postal"><br>
                     <input class="input-massive" type="text" name="direccion" id="" placeholder="Codigo postal"><br>
-                    <textarea name="textoapi" id="textoapi" cols="50" rows="6"><?php $result ?></textarea>
-                    <!--input class="input-massive" type="text" name="nombre" id="" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Fecha de Nacimiento">
-                    <input class="input-massive" type="password" name="tipo" id="" placeholder="Contraseña"-->
                     <button type="submit" class="button-massive" id="button-massive">Registrate</button>
                 </form>
                 <span class="inter">¿Ya tienes una cuenta?, <a href="../login/login.php">¡Inicia sesión!</a></span>

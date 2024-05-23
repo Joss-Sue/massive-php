@@ -15,54 +15,6 @@
   color: white;
 }
 
-.one-col {
-  width: 8.3vw;
-}
-
-.two-col {
-  width: 16.6vw;
-}
-
-.three-col {
-  width: 25vw;
-}
-
-.four-col {
-  width: 33.3vw;
-}
-
-.five-col {
-  width: 41.6vw;
-}
-
-.six-col {
-  width: 50vw;
-}
-
-.seven-col {
-  width: 58.3vw;
-}
-
-.eight-col {
-  width: 66.6vw;
-}
-
-.nine-col {
-  width: 75vw;
-}
-
-.ten-col {
-  width: 83.3vw;
-}
-
-.eleven-col {
-  width: 91.6vw;
-}
-
-.twelve-col {
-  width: 100vw;
-}
-
 .cart-button {
   text-decoration: none;
   background-color: #006D77;
@@ -140,8 +92,8 @@ nav .top-nav .cart-user img:first-child {
 nav .top-nav .cart-user img:nth-child(2) {
   max-width: 56px;
 }
-nav .top-nav .cart-user a:nth-child(2) {
-  margin-left: 15px;
+nav .top-nav .cart-user .cart-icon {
+  margin-right: 15px;
 }
 nav .top-nav .search-bar {
   display: flex;

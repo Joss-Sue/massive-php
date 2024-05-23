@@ -13,13 +13,11 @@
                     </span>
                 </div>
                 <div class="col-3 cart-user">
-                    <a class="cart-icon" href="../../config/cerrarSesion.php">
-                        <img src="../../src/icons/cart.svg" alt="">
-                    </a>
                     <div class="user-menu">
                         <img src="../../src/icons/user.svg" alt="">
                         <div class="user-dropdown">
                             <a class="dropdown-item" href="../userprofile/userprofile.php">Perfil</a>
+                            <a class="dropdown-item" href="../myProducts/myProducts.php">Mis productos</a>
                             <a class="dropdown-item" href="../../config/cerrarSesion.php">Cerrar sesión</a>
                         </div>
                     </div>

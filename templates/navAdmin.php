@@ -20,6 +20,7 @@
                         <img src="../../src/icons/user.svg" alt="">
                         <div class="user-dropdown">
                             <a class="dropdown-item" href="../userprofile/userprofile.php">Perfil</a>
+                            <a class="dropdown-item" href="../categories/categories.php">Categorías</a>
                             <a class="dropdown-item" href="../../config/cerrarSesion.php">Cerrar sesión</a>
                         </div>
                     </div>

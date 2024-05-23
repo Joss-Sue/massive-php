@@ -1,0 +1,36 @@
+.user-menu.show {
+    .user-dropdown {
+      box-shadow: -2px 4px 7px #ccc;
+      display: block;
+      z-index: 2;
+    }
+}
+
+.user-menu{
+    img{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+  
+.user-dropdown {
+    position: absolute;
+    top: 13vh;
+    display: none;
+    right: 0;
+    width: 220px;
+    background-color: #fff;
+    cursor: pointer;
+}
+  
+.dropdown-item {
+    color: #000;
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+  
+    &:active, &:hover {
+      background-color: #EBF5FF;
+    }
+}
