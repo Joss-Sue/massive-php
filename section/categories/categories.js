@@ -11,7 +11,11 @@ $( document ).ready(function() {
     });
     
     $("#add-newCategory").click(function(){
-        addCategory(session.usuario_id);
+        if($("#name").val() != '' && $("#descripcion").val() != '') {
+            addCategory(session.usuario_id);
+        }else{
+            alert('Por favor llene todos los campos');
+        }
     });
 });
 
@@ -23,11 +27,11 @@ function getCategories(){
             $("#categories-table").empty();
             $('#categories-table').append('<tr><th>Nombre</th><th>Descripción</th><th>Acciones</th></tr>');
             JSON.parse(response).forEach(function(row) {
-                messageHTML = '<tr>';
-                messageHTML += '<th>' + row.nombre + '</th>';
-                messageHTML += '<th>' + row.descripcion + '</th>';
-                messageHTML += '<th></th></tr>';
-                $('#categories-table').append(messageHTML);
+                categoryRow = '<tr>';
+                categoryRow += '<th>' + row.nombre + '</th>';
+                categoryRow += '<th>' + row.descripcion + '</th>';
+                categoryRow += '<th></th></tr>';
+                $('#categories-table').append(categoryRow);
             });
         },
         error: function(xhr, status, error) {

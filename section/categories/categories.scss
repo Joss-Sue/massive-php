@@ -15,6 +15,11 @@ $font-family_1: "Inter", sans-serif;
                             display: flex;
                             flex-direction: row;
                             flex-wrap: nowrap;
+                            input{
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
                         }
                     }
                     button.show-form{

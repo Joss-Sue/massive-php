@@ -19,6 +19,7 @@
                     <div class="user-menu">
                         <img src="../../src/icons/user.svg" alt="">
                         <div class="user-dropdown">
+                            <p class="dropdown-item" id="user_name"></p>
                             <a class="dropdown-item" href="../userprofile/userprofile.php">Perfil</a>
                             <a class="dropdown-item" href="../../config/cerrarSesion.php">Cerrar sesión</a>
                         </div>

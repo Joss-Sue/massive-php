@@ -15,5 +15,20 @@
 .myProducts-body .add-product-section div div div a i:hover {
   opacity: 0.8;
 }
+.myProducts-body .my-products-section div div div table {
+  font-family: "Inter", sans-serif;
+}
+.myProducts-body .my-products-section div div div table tr th {
+  width: 33vw;
+}
+.myProducts-body .my-products-section div div div table tr:not(:first-child) th {
+  font-weight: 400 !important;
+  border: solid #006D77 2px;
+}
+.myProducts-body .my-products-section div div div table tr:first-child th {
+  border: solid #006D77 2px;
+  background-color: #006D77;
+  color: white;
+}
 
 /*# sourceMappingURL=myproducts.css.map */

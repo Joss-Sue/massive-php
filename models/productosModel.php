@@ -197,10 +197,10 @@ class ProductoClass{
         //$tipo="vendedor";
         if($_SESSION['usuario_tipo']=="vendedor"){
         //if($tipo=="vendedor"){
-        $sql="select* from productos where vendedorProd = :id order by fchCreacionProd desc limit 2 offset :pagina";
+        $sql="select* from productos where vendedorProd = :id order by fchCreacionProd desc limit 20 offset :pagina";
         }elseif($_SESSION['usuario_tipo']=="admin"){
         //}elseif($tipo=="admin"){
-            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id by fchCreacionProd desc limit 2 offset :pagina";
+            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id by fchCreacionProd desc limit 20 offset :pagina";
         }else{
             return null;
         }

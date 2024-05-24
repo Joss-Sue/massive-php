@@ -18,19 +18,26 @@
     position: absolute;
     top: 13vh;
     display: none;
-    right: 0;
+    right: 1vw;
+    @media (min-width: 1400px){
+        right: 5vw;
+    }
     width: 220px;
     background-color: #fff;
-    cursor: pointer;
-}
-  
-.dropdown-item {
-    color: #000;
-    display: block;
-    padding: 1rem;
-    text-decoration: none;
-  
-    &:active, &:hover {
-      background-color: #EBF5FF;
+    .dropdown-item{
+        color: #000;
+        display: block;
+        padding: 1rem;
+        text-decoration: none;
+    }
+    a{
+        &:active, &:hover {
+          background-color: #EBF5FF;
+          cursor: pointer;
+        }
+    }
+    p{
+        font-size: 20px;
     }
 }
+  

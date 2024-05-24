@@ -45,7 +45,7 @@
                             </div>
                             <label for="category">Selecciona una categoría</label>
                             <select name="category" id="category"></select>
-                            <button>Agregar producto</button>
+                            <button id="add-product-button">Agregar producto</button>
                         </form>
                     </div>
                 </div>

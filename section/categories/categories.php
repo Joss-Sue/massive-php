@@ -21,11 +21,6 @@
                 <div class="col-12" id="categories-list">
                     <h3>Categorías</h3>
                     <table id="categories-table">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
-                        </tr>
                     </table>
                 </div>
             </div>

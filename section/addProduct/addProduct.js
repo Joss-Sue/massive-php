@@ -25,6 +25,7 @@ function getCategories(){
             });
         },
         error: function(xhr, status, error) {
+            $('#add-product-button').prop("disabled", true);
             console.log('error');
             console.log(error);
         },
@@ -53,6 +54,7 @@ function addProduct(seller){
         },
         success: function(data) {
             console.log(data);
+            alert('Producto agregado correctamente');
             $("#name").val('');
             $("#description").val('');
             $("#price").val(0);
