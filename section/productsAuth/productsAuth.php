@@ -14,8 +14,25 @@
     
  ?>
     
-<section class="productsAuth-body">
-    holas
+<section class="products-auth-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Productos por autorizar</h3>
+            </div>
+        </div>
+    </div>
 </section>
+<section class="products-to-auth-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table id="products-to-auth">
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</section>  
     
 <?php include("../../templates/pie.php"); ?>

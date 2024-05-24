@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"productsauth.css"}
+{"version":3,"sourceRoot":"","sources":["productsAuth.scss"],"names":[],"mappings":"AAOgB;EACI,aAPJ;;AASQ;EACI;;AAGA;EACI;EACA;;AAIJ;EACI;EACA;EACA","file":"productsauth.css"}
