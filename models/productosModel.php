@@ -172,13 +172,12 @@ class ProductoClass{
     static function buscarAllProductos($pagina){
         $pagina=($pagina-1)*2;
         self::inicializarConexion();
-        if($_SESSION['tipo_usuario']=="comprador"){
+        if(true){
         $sql="select* from productos where activoProd = 1 order by fchCreacionProd desc limit 2 offset :pagina";
         }elseif($_SESSION['tipo_usuario']=="admin"){
             $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 2 offset :pagina";
         }
         $sentencia = self::$conexion-> prepare($sql);
-        //$sentencia -> execute([':pagina'=> 2]);
         $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
         $sentencia->execute();
         
@@ -192,18 +191,25 @@ class ProductoClass{
         }
     }
 
-    static function buscarAllProductosVendedorAdmin($pagina){
-        //$pagina=($pagina-1)*2;
+    static function buscarAllProductosWithID($pagina,$id){
+        $pagina=($pagina-1)*2;
         self::inicializarConexion();
+        //$tipo="vendedor";
         if($_SESSION['usuario_tipo']=="vendedor"){
-        $sql="select* from productos where vendedorProd = 1 order by fchCreacionProd desc limit 2 offset 1";
+        //if($tipo=="vendedor"){
+        $sql="select* from productos where vendedorProd = :id order by fchCreacionProd desc limit 2 offset :pagina";
         }elseif($_SESSION['usuario_tipo']=="admin"){
-            $sql="select * from productos where activoProd = 1 and adminAutoriza = 1 by fchCreacionProd desc limit 2 offset 1";
+        //}elseif($tipo=="admin"){
+            $sql="select * from productos where activoProd = 1 and adminAutoriza = :id by fchCreacionProd desc limit 2 offset :pagina";
+        }else{
+            return null;
         }
         $sentencia = self::$conexion-> prepare($sql);
-        //$sentencia -> execute([':pagina'=> 2]);
-        //$sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
-        $sentencia->execute();
+        $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT,);
+        $sentencia->bindValue(':id',$id, PDO::PARAM_INT);
+        $sentencia -> execute();
+        
+        //$sentencia->execute();
         
     
         $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);

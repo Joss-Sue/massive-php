@@ -6,8 +6,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         {
             
-            //http://localhost/massivedemo/api/productosController.php/?id=2
-            if (isset($_GET['id'])) {
+            //http://localhost/massivedemo/api/productosController.php/?id=3&pagina=1
+            if (isset($_GET['pagina']) && isset($_GET['id'])){//arreglar usando headers
+                $productosRespuesta = ProductoClass::buscarAllProductosWithID($_GET['pagina'],$_GET['id']);
+                if($productosRespuesta==null){
+                    http_response_code(400);
+                    echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
+                }else{
+                    http_response_code(200);
+                    echo json_encode($productosRespuesta);
+                }exit; 
+            }
+            elseif (isset($_GET['id'])) {
                 $productosRespuesta = ProductoClass::buscarProductoByID($_GET['id']);
                 if($productosRespuesta==null){
                     http_response_code(400);
@@ -15,27 +25,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 }else{
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
-                }
+                }exit;
             }elseif (isset($_GET['pagina'])){
                 //http://localhost/massivedemo/api/productosController.php/?pagina=1
                 $productosRespuesta = ProductoClass::buscarAllProductos($_GET['pagina']);
                 if($productosRespuesta==null){
-                    echo "entre a if tipo_categoria";
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
                 }else{
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
-                }
-            }elseif (isset($_SESSION["usuario_tipo"]) || $_SESSION["usuario_tipo"]=="vendedor"){//arreglar usando headers
-                $productosRespuesta = ProductoClass::buscarAllProductosVendedorAdmin($_SESSION['usuario_tipo']);
-                if($productosRespuesta==null){
-                    http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
-                }else{
-                    http_response_code(200);
-                    echo json_encode($productosRespuesta);
-                }
+                }exit;
             }
             http_response_code(400);
             echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));

@@ -14,7 +14,7 @@ class ProductosCarritoClass{
         self::inicializarConexion();
         
         try{
-        $sqlInsert="call ActualizarInsertarCarrito(:idCarrito,:cantidad,:idCarrito)";
+        $sqlInsert="call ActualizarInsertarCarrito(:idCarrito,:cantidad,:productoID)";
         $consultaInsert= self::$conexion->prepare($sqlInsert);
         $consultaInsert->execute([':productoID'=>$productoID,
                                   ':cantidad'=>$cantidad,
@@ -23,9 +23,6 @@ class ProductosCarritoClass{
         
         }catch(PDOException $e){
             if ($e->errorInfo[1] == 1062) {
-                $cadena = "El producto ya esta en el carrito.";
-                return array(false, $cadena);
-            } else {
                 return array(false, "Error al poner el producto en el carrito: " . $e->getMessage());
             }
         }
