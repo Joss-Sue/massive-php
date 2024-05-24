@@ -5,8 +5,6 @@ $( document ).ready(function() {
     $.ajaxSetup({cache: false})
     $.get('../../api/getsession.php', function (data) {
         session = JSON.parse(data);
-        console.log(session);
-        console.log(session.usuario_nombre);
     });
     $("#show-form").click(function(){
         $("#add-category").slideToggle("slow");
@@ -18,13 +16,19 @@ $( document ).ready(function() {
 });
 
 function getCategories(){
-    console.log('Hola');
     $.ajax({
         type: "GET",
         url: "../../api/categoriaController.php",
         success: function(response) {
-            console.log('success');
-            console.log(response);
+            $("#categories-table").empty();
+            $('#categories-table').append('<tr><th>Nombre</th><th>Descripción</th><th>Acciones</th></tr>');
+            JSON.parse(response).forEach(function(row) {
+                messageHTML = '<tr>';
+                messageHTML += '<th>' + row.nombre + '</th>';
+                messageHTML += '<th>' + row.descripcion + '</th>';
+                messageHTML += '<th></th></tr>';
+                $('#categories-table').append(messageHTML);
+            });
         },
         error: function(xhr, status, error) {
             console.log('error');
@@ -34,7 +38,6 @@ function getCategories(){
 };
 
 function addCategory(createdBy){
-    console.log('Agregar categorias');
     var nombre = $("#name").val();
     var descripcion = $("#descripcion").val();
     $.ajax({
@@ -45,11 +48,11 @@ function addCategory(createdBy){
             descripcion: descripcion,
             createdBy: createdBy
         },
-        success: function(response) {
-            $("#name").val() = '';
-            $("#descripcion").val() = '';
-            console.log('success');
-            console.log(response);
+        success: function(data) {
+            $("#name").val('');
+            $("#descripcion").val('');
+            $("#add-category").slideToggle("slow");
+            getCategories();
         },
         error: function(xhr, status, error) {
             console.log('error');

@@ -39,7 +39,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $data = json_decode(file_get_contents('php://input'), true);
 
-               /* $nombre= (isset($data['nombre']))?$data['nombre']:null;
+                /* $nombre= (isset($data['nombre']))?$data['nombre']:null;
                 $descripcion= (isset($data['descripcion']))?$data['descripcion']:null;
                 $createdBy= (isset($data['createdBy']))?$data['createdBy']:null;*/
                 
@@ -52,14 +52,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                 $resultadoFuncion = CategoriaClass::registrarCategoria($nombre, $descripcion, $createdBy);
 
-               if ($resultadoFuncion[0]){
-                http_response_code(200);
-                echo json_encode(array("status" => "success", "message" => $resultadoFuncion[1]));
-               }else{
-                http_response_code(400);
-                echo json_encode(array("status" => "error", "message" => $resultadoFuncion[1]));
-                }  
-               break;
+                if ($resultadoFuncion[0]){
+                        http_response_code(200);
+                        $json_response = ["success" => true];
+                        echo json_encode($json_response);
+                }else{
+                        http_response_code(400);
+                        $json_response = ["error" => true];
+                        echo json_encode($json_response);
+                }
+                exit;
             }
             
     case 'PUT':

@@ -15,5 +15,20 @@
   border: none;
   color: white;
 }
+.categories-body .categories-section div div div table {
+  font-family: "Inter", sans-serif;
+}
+.categories-body .categories-section div div div table tr th {
+  width: 33vw;
+}
+.categories-body .categories-section div div div table tr:not(:first-child) th {
+  font-weight: 400 !important;
+  border: solid #006D77 2px;
+}
+.categories-body .categories-section div div div table tr:first-child th {
+  border: solid #006D77 2px;
+  background-color: #006D77;
+  color: white;
+}
 
 /*# sourceMappingURL=categories.css.map */

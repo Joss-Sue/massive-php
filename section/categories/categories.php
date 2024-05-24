@@ -18,8 +18,15 @@
     <section class="categories-section">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" id="categories-list">
                     <h3>Categorías</h3>
+                    <table id="categories-table">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -32,11 +39,11 @@
                         <form>
                             <div>
                                 <label for="name">Nombre</label>
-                                <input type="text" name="name" id="name">
+                                <input type="text" name="name" id="name" required>
                             </div>
                             <div>
                                 <label for="descripcion" >Descripción</label>
-                                <input type="text" name="descripcion" id="descripcion">
+                                <input type="text" name="descripcion" id="descripcion" required>
                             </div>
                         </form>
                         <button id="add-newCategory">AGREGAR</button>
