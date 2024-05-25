@@ -210,5 +210,60 @@ BEGIN
 END //
 DELIMITER ;
 
+    DELIMITER //
+CREATE PROCEDURE getUser( in param_correo VARCHAR(255))
+BEGIN
+	select usuarios.iduser, usuarios.contrasena, usuarios.nombre, carritos.idCart as carritoID 
+    from usuarios inner join carritos 
+    on usuarios.iduser = carritos.usuarioCart 
+    where correo = param_correo;
+END //
+DELIMITER ;
 
+-- borrar este trigger si existe--
+    drop trigger after_itemcarrito_insert;
 
+    alter table carritos add column totalCosto decimal(10,2) default 0.00;
+
+     drop procedure ActualizarInsertarCarrito;
+    DELIMITER //
+    CREATE PROCEDURE ActualizarInsertarCarrito(
+        IN param_idCarrito INT,
+        IN param_Cantidad INT,
+        IN param_carritoProduc INT
+    )
+    BEGIN
+        IF EXISTS (SELECT 1 FROM productosCarrito WHERE productoID = param_carritoProduc and idCarrito = param_idCarrito and activo = 1) THEN
+            UPDATE productosCarrito
+            SET cantidad = cantidad + param_Cantidad
+            WHERE productoID = param_carritoProduc AND idCarrito = param_idCarrito and activo=1;
+        ELSE
+            INSERT INTO productosCarrito(idCarrito, cantidad, productoID)
+            VALUES(param_idCarrito, param_Cantidad, param_carritoProduc);
+            UPDATE carritos SET totalItems = totalItems + 1 WHERE idCart = param_idCarrito;
+        END IF;
+		update carritos
+		Set totalCosto = (SELECT SUM(productosCarrito.cantidad * productos.precioProd) AS costo_total
+		FROM productosCarrito
+		JOIN productos ON productosCarrito.productoID = productos.idProd
+		WHERE productosCarrito.idCarrito = param_idCarrito) where idCart = param_idCarrito;
+    END //
+    DELIMITER ;
+
+drop procedure  if exists getProductosCarrito;
+        DELIMITER //
+    CREATE PROCEDURE GetProductosCarrito(IN carritoID INT)
+BEGIN
+    SELECT 
+        productosCarrito.cantidad, 
+        productos.nombreProd, 
+        productos.precioProd, 
+        productos.precioProd * productosCarrito.cantidad as subtotal
+    FROM 
+        productosCarrito 
+    JOIN 
+        productos ON productosCarrito.productoID = productos.idProd
+    WHERE productosCarrito.idCarrito = carritoID and  productosCarrito.activo = 1
+	order by productosCarrito.id desc;
+END //
+DELIMITER ;

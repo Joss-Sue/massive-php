@@ -170,7 +170,7 @@ class ProductoClass{
     }
 
     static function buscarAllProductos($pagina){
-        $pagina=($pagina-1)*2;
+        $pagina=($pagina-1)*20;
         self::inicializarConexion();
         if($_SESSION['usuario_tipo']=="admin"){
             $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 20 offset :pagina";
@@ -191,8 +191,27 @@ class ProductoClass{
         }
     }
 
+    static function buscarByCategoria($pagina,$categoria){
+        $pagina=($pagina-1)*20;
+        self::inicializarConexion();
+        
+        $sql="select * from productos where activoProd = 1 and estaListadoProd = 1 and categoriaProd = :categoria order by fchCreacionProd desc limit 20 offset :pagina";
+        $sentencia = self::$conexion->prepare($sql);
+        $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
+        $sentencia->bindValue(':categoria', $categoria, PDO::PARAM_INT);
+        $sentencia->execute();
+        
+        $productos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    
+        if(!$productos) {
+           return null;
+        }else{
+            return $productos;
+        }
+    }
+
     static function buscarAllProductosWithID($pagina,$id){
-        $pagina=($pagina-1)*2;
+        $pagina=($pagina-1)*20;
         self::inicializarConexion();
         //$tipo="vendedor";
         if($_SESSION['usuario_tipo']=="vendedor"){

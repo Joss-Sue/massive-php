@@ -12,16 +12,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if($productosRespuesta==null){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
+                    exit;
                 }else{
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
                 }exit; 
-            }
-            elseif (isset($_GET['id'])) {
-                $productosRespuesta = ProductoClass::buscarProductoByID($_GET['id']);
+            }elseif (isset($_GET['pagina']) && isset($_GET['categoria'])){
+                //http://localhost/massivedemo/api/productosController.php/?pagina=1
+                $productosRespuesta = ProductoClass::buscarByCategoria($_GET['pagina'],$_GET['categoria']);
                 if($productosRespuesta==null){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
+                    exit;
                 }else{
                     http_response_code(200);
                     echo json_encode($productosRespuesta);
@@ -32,6 +34,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 if($productosRespuesta==null){
                     http_response_code(400);
                     echo json_encode(array("status" => "error", "message" => "ningun usuario encontrado"));
+                    exit;
                 }else{
                     http_response_code(200);
                     echo json_encode($productosRespuesta);

@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }
 
 function matchLogin($correo, $contrasena, $conexion, $isRecordar){
-    $sql="SELECT * FROM usuarios WHERE correo=:correo";
+    $sql="call getUser( :correo )";
     $sentencia = $conexion-> prepare($sql);
     $sentencia -> execute(['correo'=>$correo]);
 
@@ -53,16 +53,17 @@ function matchLogin($correo, $contrasena, $conexion, $isRecordar){
         //$_SESSION['correo']=$usuarios["CORREO"];
         $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
+        $_SESSION['usuario_carrito']=$usuario["carritoID"];
         /*echo'<script type="text/javascript">
         alert("'.$_SESSION['usuario_tipo'].'");
         </script>';*/
-        echo $_SESSION['usuario_nombre'];
-        echo $_SESSION['usuario_id'];
+        //echo $_SESSION['usuario_nombre'];
+        //echo $_SESSION['usuario_id'];
         //header('Location: index.php');
-        echo'<script type="text/javascript">
+        /*echo'<script type="text/javascript">
         alert("Inicio de sesion con exito");
         window.location.href="../dashboard/dashboard.php";
-        </script>';
+        </script>';}*/
         if($isRecordar){
             setcookie('correo',$correo,time()+3600, "/");
             setcookie('contrasena',$contrasena,time()+3600, "/");            
@@ -75,12 +76,12 @@ function matchLogin($correo, $contrasena, $conexion, $isRecordar){
         return;
     }
 
-    echo "todo bien";
+    //echo "todo bien";
     return true;
 }
 
 function matchLoginCookie($conexion, $correo, $contrasena){
-    $sql="SELECT * FROM usuarios WHERE correo=:correo";
+    $sql="call getUser( :correo )";
     $sentencia = $conexion-> prepare($sql);
     $sentencia -> execute(['correo'=>$correo]);
 
@@ -96,6 +97,7 @@ function matchLoginCookie($conexion, $correo, $contrasena){
         $_SESSION['usuario_id']=$usuario["iduser"];
         $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
+        $_SESSION['usuario_carrito']=$usuario["carritoID"];
         setcookie('correo',$correo,time()+3600,"/");
         setcookie('contrasena',$contrasena,time()+3600,"/");
 
