@@ -79,29 +79,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json{"id":"2","nombre":"Wilson Backpack 5","descripcion":"Mochila Wilson modelo WB-03",
             "precio":499.00,"stock":30,"vendedor":"4","categoria":"3"}*/
-            $data = json_decode(file_get_contents('php://input'), true);
+            parse_str(file_get_contents("php://input"),$sent_vars);
 
             if(isset($_SERVER['HTTP_ACTION'])){
-                //ejemplo json{"idProducto":"2", "idAdmin":"1"}
-                extract($data);
-            
-                if(empty($idProducto) || empty($idAdmin)){
-                    http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
-                    exit;
-                }
-
-                    $resultadoFuncion = ProductoClass::autorizarAdmin($idProducto, $idAdmin);
-                if ($resultadoFuncion[0]){
-                    http_response_code(200);
-                    echo json_encode(array("status" => "success", "message" => $resultadoFuncion[1]));
-                   }else{
-                    http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => $resultadoFuncion[1]));
-                }
-                break;
-
-            }else{
                 extract($data);
             
                 if(empty($nombre) || empty($descripcion) || empty($precio) || empty($id)){
@@ -119,6 +99,31 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     echo json_encode(array("status" => "error", "message" => $resultadoFuncion[1]));
                 }
                 break;
+
+            }else{
+                //ejemplo json{"idProducto":"2", "idAdmin":"1"}
+                
+                $idProducto = (int)$sent_vars['idProducto'];
+                $idAdmin = (int)$sent_vars['idAdmin'];
+            
+                if(empty($idProducto) || empty($idAdmin)){
+                    http_response_code(400);
+                    $json_response = ["error" => true];
+                    echo json_encode($json_response);
+                    exit;
+                }
+
+                $resultadoFuncion = ProductoClass::autorizarAdmin($idProducto, $idAdmin);
+                if ($resultadoFuncion[0]){
+                    http_response_code(200);
+                    $json_response = ["success" => true];
+                    echo json_encode($json_response);
+                   }else{
+                    http_response_code(400);
+                    $json_response = ["error" => true];
+                    echo json_encode($json_response);
+                }
+                exit;
             }            
         }
     case 'DELETE':

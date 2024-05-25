@@ -172,10 +172,10 @@ class ProductoClass{
     static function buscarAllProductos($pagina){
         $pagina=($pagina-1)*2;
         self::inicializarConexion();
-        if(true){
-        $sql="select* from productos where activoProd = 1 order by fchCreacionProd desc limit 2 offset :pagina";
-        }elseif($_SESSION['tipo_usuario']=="admin"){
-            $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 2 offset :pagina";
+        if($_SESSION['usuario_tipo']=="admin"){
+            $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 20 offset :pagina";
+        }else{
+            $sql="select* from productos where activoProd = 1 order by fchCreacionProd desc limit 2 offset :pagina";
         }
         $sentencia = self::$conexion-> prepare($sql);
         $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);

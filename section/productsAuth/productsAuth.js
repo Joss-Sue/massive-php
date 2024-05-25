@@ -27,7 +27,8 @@ function getProductsToAuth(userId){
             });
         },
         error: function(xhr, status, error) {
-            alert('Error al cargar los productos por autorizar.');
+            var noProducts = '<p>No hay productos por autorizar</p>';
+            $('#products-to-auth').append(noProducts);
             console.log('error');
             console.log(error);
         },
@@ -40,21 +41,22 @@ function getStatus(status){
 
 function authProduct(productId, userId){
     console.log('Auth product');
-    // $.ajax({
-    //     type: "PUT",
-    //     url: "../../api/productosController.php",
-    //     data: {
-    //         idProducto: productId,
-    //         idAdmin: userId
-    //     },
-    //     success: function(response) {
-    //         console.log(response);
-    //         getProductsToAuth(userId);
-    //     },
-    //     error: function(xhr, status, error) {
-    //         alert('Error al autorizar el producto.');
-    //         console.log('error');
-    //         console.log(error);
-    //     },
-    // });
+    $.ajax({
+        type: "PUT",
+        url: "../../api/productosController.php",
+        data: {
+            idProducto: productId,
+            idAdmin: userId
+        },
+        success: function(response) {
+            console.log(response);
+            alert('¡Producto autorizado correctamente!');
+            getProductsToAuth(userId);
+        },
+        error: function(xhr, status, error) {
+            alert('Error al autorizar el producto.');
+            console.log('error');
+            console.log(error);
+        },
+    });
 }

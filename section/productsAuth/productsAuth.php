@@ -26,7 +26,7 @@
 <section class="products-to-auth-section">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" id="product-table-container">
                 <table id="products-to-auth">
                     
                 </table>
