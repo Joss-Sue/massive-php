@@ -1,5 +1,6 @@
+var session;
+
 $( document ).ready(function() {
-    var session;
     $.ajaxSetup({cache: false})
     $.get('../../api/getsession.php', function (data) {
         session = JSON.parse(data);
@@ -29,3 +30,22 @@ function setProduct(productTitle, productDesc, productPrice, productPreviousPric
     $("#product-price").append('$' + Number(productPrice));
     $("#product-previous-price").append('$' + (Number(productPreviousPrice) * 2));
 };
+
+function addToCart(cantidad){
+    $.ajax({
+        type: "POST",
+        url: "../../api/productosCarritoController.php",
+        data: {
+            idCarrito: session.usuario_carrito,
+            cantidad: cantidad,
+            productoID: Number($("#product_id").val())
+        },
+        success: function(data) {
+            alert('Producto agregado al carrito');
+        },
+        error: function(xhr, status, error) {
+            console.log('error');
+            console.log(error);
+        },
+    });
+}

@@ -137,6 +137,13 @@ nav .bottom-nav .categories a:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
+nav .bottom-nav .all-products {
+  text-align: center;
+}
+nav .bottom-nav .all-products a {
+  text-decoration: none;
+  padding: 10px 0px;
+}
 
 /*Termina nav*/
 

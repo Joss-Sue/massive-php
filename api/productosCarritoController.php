@@ -20,26 +20,30 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json{"productoID":1, "cantidad":3, "idCarrito":"1"}*/
 
+            $idCarrito = $_POST['idCarrito'];
+            $cantidad = $_POST['cantidad'];
+            $productoID = $_POST['productoID'];
+
             $data = json_decode(file_get_contents('php://input'), true);
-
-                extract($data);
-                
-                if(empty($productoID) || empty($cantidad) || empty($idCarrito)){
-                    http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
-                }
-
-                $resultadoFuncion = ProductosCarritoClass::registrarProducto($idCarrito,$cantidad,$productoID);
-
-               if ($resultadoFuncion[0]){
-                http_response_code(200);
-                echo json_encode(array("status" => "success", "message" => $resultadoFuncion[1]));
-               }else{
+            
+            if(empty($idCarrito) || empty($cantidad) || empty($productoID)){
                 http_response_code(400);
-                echo json_encode(array("status" => "error", "message" => $resultadoFuncion[1]));
-                }  
-               break;
+                echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
             }
+
+            $resultadoFuncion = ProductosCarritoClass::registrarProducto($idCarrito,$cantidad,$productoID);
+
+            if ($resultadoFuncion[0]){
+                http_response_code(200);
+                $json_response = ["success" => true];
+                echo json_encode($json_response);
+            }else{
+                http_response_code(400);
+                $json_response = ["error" => true];
+                echo json_encode($json_response);
+            }  
+            exit;
+        }
             
     case 'PUT':
         {

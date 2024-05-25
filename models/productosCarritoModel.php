@@ -90,10 +90,11 @@ class ProductosCarritoClass{
     }
 
     static function buscarAllProductos($id){
+
         self::inicializarConexion();
         $sql="CALL GetProductosCarrito(:id)";
         $sentencia = self::$conexion-> prepare($sql);
-        $sentencia -> execute([':id'=> $id]);
+        $sentencia -> execute(['id'=>$id]);
         //$sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
         //$sentencia->execute();
         

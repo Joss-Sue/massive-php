@@ -43,7 +43,7 @@
                     <p id="product-previous-price"></p>
                 </div>
                 <div class="buttons-container">
-                    <button>Agregar al carrito</button>
+                    <button onclick="addToCart(1)">Agregar al carrito</button>
                     <button><i class="fa fa-heart-o"></i></button>
                 </div>
             </div>

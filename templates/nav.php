@@ -13,7 +13,7 @@
                     </span>
                 </div>
                 <div class="col-3 cart-user">
-                    <a class="cart-icon" href="../../config/cerrarSesion.php">
+                    <a class="cart-icon" href="../userCart/userCart.php">
                         <img src="../../src/icons/cart.svg" alt="">
                     </a>
                     <div class="user-menu">
@@ -41,6 +41,11 @@
                     <a href="">Deportes</a>
                 </div>
                 <div class="col-3">
+                </div>
+            </div>
+            <div class="row all-products">
+                <div class="col-12">
+                    <a href="../products/products.php">Mostrar todos los productos</a>
                 </div>
             </div>
         </div>

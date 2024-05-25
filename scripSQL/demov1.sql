@@ -267,3 +267,22 @@ BEGIN
 	order by productosCarrito.id desc;
 END //
 DELIMITER ;
+
+--ORDEN ELIMINADO, LA COLUMNA productosCarrito.id no existe en la BD
+
+drop procedure  if exists getProductosCarrito;
+        DELIMITER //
+    CREATE PROCEDURE GetProductosCarrito(IN carritoID INT)
+BEGIN
+    SELECT 
+        productosCarrito.cantidad, 
+        productos.nombreProd, 
+        productos.precioProd, 
+        productos.precioProd * productosCarrito.cantidad as subtotal
+    FROM 
+        productosCarrito 
+    JOIN 
+        productos ON productosCarrito.productoID = productos.idProd
+    WHERE productosCarrito.idCarrito = carritoID and  productosCarrito.activo = 1;
+END //
+DELIMITER ;
