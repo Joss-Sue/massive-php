@@ -1,0 +1,49 @@
+$massive-blue: #006D77;
+$font-family_1: "Inter", sans-serif;
+
+.products-body{
+    padding: 20px 0px 20px 0px;
+    .product-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        img{
+            text-align: center;
+            object-fit: contain;
+            object-position: center;
+            max-width: 90%;
+        }
+        form{
+            max-width: 90%;
+            .product-title{
+                font-size: 20px;
+            }
+            .product-desc{
+                font-size: 15px;
+            }
+            .product-price{
+                font-size: 25px;
+            }
+            .product-buttons-container{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+                button{
+                    background-color: $massive-blue;
+                    border-radius: 5px;
+                    border: none;
+                    color: white;
+                    padding: 5px;
+                    &:hover{
+                        color: $massive-blue;
+                        background-color: white;
+                        transition: ease-in-out;
+                        transition-duration: .3s;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -173,7 +173,7 @@ class ProductoClass{
         $pagina=($pagina-1)*20;
         self::inicializarConexion();
         if($_SESSION['usuario_tipo']=="admin"){
-            $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 20 offset :pagina";
+            $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 21 offset :pagina";
         }else{
             $sql="select* from productos where activoProd = 1 order by fchCreacionProd desc limit 2 offset :pagina";
         }
