@@ -49,34 +49,28 @@ function matchLogin($correo, $contrasena, $conexion, $isRecordar){
     if($contrasena == $usuario["contrasena"]){
         
         $_SESSION['usuario_id']=$usuario["iduser"];
-        
-        //$_SESSION['correo']=$usuarios["CORREO"];
         $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
         $_SESSION['usuario_carrito']=$usuario["carritoID"];
-        /*echo'<script type="text/javascript">
-        alert("'.$_SESSION['usuario_tipo'].'");
-        </script>';*/
-        //echo $_SESSION['usuario_nombre'];
-        //echo $_SESSION['usuario_id'];
-        //header('Location: index.php');
-        /*echo'<script type="text/javascript">
-        alert("Inicio de sesion con exito");
-        window.location.href="../dashboard/dashboard.php";
-        </script>';}*/
+
         if($isRecordar){
             setcookie('correo',$correo,time()+3600, "/");
             setcookie('contrasena',$contrasena,time()+3600, "/");            
         }
+
+        echo'<script type="text/javascript">
+        alert("Inicio de sesion con exito");
+        window.location.href="../dashboard/dashboard.php";
+        </script>';
     }else{
         
-        echo "Error en la contraseña o correo";
-        //print_r($usuarios["CONTRASENA"] . "serve");
-        //print_r($contrasena . "input");
+        echo'<script type="text/javascript">
+        alert("Error en contraseña o correo);
+        </script>';
+
         return;
     }
 
-    //echo "todo bien";
     return true;
 }
 
