@@ -44,11 +44,36 @@
                 </div>
                 <div class="buttons-container">
                     <button onclick="addToCart(1)">Agregar al carrito</button>
-                    <button><i class="fa fa-heart-o"></i></button>
+                    <button onclick="newEmail()">Negociar</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<div class="modal" id="cotizacionModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="cotizacion-header">
+                <h3>Solicitud de cotización</h3>
+            </div>
+            <div class="cotizacion-body">
+                <h1>Tennis Nike</h1>
+                <p>Los mejores tennis</p>
+                <div>
+                    <h4>Precio original</h4>
+                    <h5>$1,500</h5>
+                </div>
+                <div>
+                    <h4>Precio solicitado</h4>
+                    <input type="number" name="price" id="price" step=".01" required>
+                </div>
+                <div>
+                    <button onclick="solicitarCotizacion()">Solicitar negociación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
 <?php include("../../templates/pie.php"); ?>

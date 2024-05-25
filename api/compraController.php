@@ -10,7 +10,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json[{"articulosTotales":"3", "idProducto":"3"},{"articulosTotales":"5", "idProducto":"1"}]*/
             if(isset($_SERVER['HTTP_ID']) && isset($_SERVER['HTTP_COSTO'])){
-            $dataArray = json_decode(file_get_contents('php://input'), true);
+                $dataArray = json_decode(file_get_contents('php://input'), true);
 
                 //extract($data);
                 

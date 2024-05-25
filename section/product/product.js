@@ -1,4 +1,5 @@
 var session;
+var product;
 
 $( document ).ready(function() {
     $.ajaxSetup({cache: false})
@@ -14,7 +15,7 @@ function getProduct(productId){
         url: "../../api/productosController.php/?productId=" + productId,
         success: function(response) {
             console.log(JSON.parse(response));
-            var product = JSON.parse(response);
+            product = JSON.parse(response);
             setProduct(product.nombreProd, product.descripcionProd, product.precioProd, product.precioProd);
         },
         error: function(xhr, status, error) {
@@ -48,4 +49,32 @@ function addToCart(cantidad){
             console.log(error);
         },
     });
+}
+
+function newEmail(){
+    $('#cotizacionModal').modal("show");;
+}
+
+function solicitarCotizacion(){
+    if($('#price').val() != ''){
+        $.ajax({
+            type: "POST",
+            url: "../../api/cotizacionesController.php",
+            data: {
+                idProducto: product.idProd, 
+                idCliente: session.usuario_id, 
+                idVendedor: product.vendedorProd, 
+                precioReal: Number(product.precioProd), 
+                precioSolicitado: Number($('#price').val()).toFixed(2), 
+                Estatus: 0
+            },
+            success: function(data) {
+                console.log('se registró la cotización');
+            },
+            error: function(xhr, status, error) {
+                console.log('error');
+                console.log(error);
+            },
+        });
+    }
 }

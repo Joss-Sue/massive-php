@@ -286,3 +286,19 @@ BEGIN
     WHERE productosCarrito.idCarrito = carritoID and  productosCarrito.activo = 1;
 END //
 DELIMITER ;
+
+
+
+CREATE TABLE cotizaciones (
+	Id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador del registro',
+    ProductoId INT NOT NULL COMMENT 'Producto a cotizar',
+    ClienteId INT NOT NULL COMMENT 'Cliente que solicita la cotización',
+    VendedorId INT NOT NULL COMMENT 'Vendedor al que pertenece el producto',
+    PrecioProducto DECIMAL(10, 2) COMMENT 'Precio del producto',
+    PrecioSolicitado DECIMAL(10, 2) COMMENT 'Precio solicitado del producto',
+    Estatus BOOLEAN DEFAULT FALSE COMMENT '0 = Solicitado, 1 = Autorizado, 2 = Rechazado',
+    
+     FOREIGN KEY (ProductoId) REFERENCES productos(idProd),
+     FOREIGN KEY (ClienteId) REFERENCES usuarios(iduser),
+     FOREIGN KEY (VendedorId) REFERENCES usuarios(iduser)
+);

@@ -47,4 +47,41 @@
   transition-duration: 0.3s;
 }
 
+#cotizacionModal .cotizacion-header {
+  color: #006D77;
+}
+#cotizacionModal .cotizacion-header h3 {
+  padding: 10px;
+}
+#cotizacionModal .cotizacion-body {
+  padding: 10px;
+}
+#cotizacionModal .cotizacion-body p {
+  font-size: 20px;
+}
+#cotizacionModal .cotizacion-body div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#cotizacionModal .cotizacion-body div button {
+  background-color: #006D77;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+#cotizacionModal .cotizacion-body div button:hover {
+  color: #006D77;
+  background-color: white;
+  transition: ease-in-out;
+  transition-duration: 0.3s;
+}
+#cotizacionModal .cotizacion-body div input:focus {
+  outline: none;
+}
+
 /*# sourceMappingURL=product.css.map */

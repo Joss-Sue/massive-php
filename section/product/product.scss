@@ -53,3 +53,44 @@ $massive-blue: #006D77;
         }
     }
 }
+
+#cotizacionModal{
+    .cotizacion-header{
+        color: $massive-blue;
+        h3{
+            padding: 10px;
+        }
+    }
+    .cotizacion-body{
+        padding: 10px;
+        p{
+            font-size: 20px;
+        }
+        div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            button{
+                background-color: $massive-blue;
+                border-radius: 5px;
+                border: none;
+                color: white;
+                padding: 10px;
+                &:hover{
+                    color: $massive-blue;
+                    background-color: white;
+                    transition: ease-in-out;
+                    transition-duration: .3s;
+                }
+            }
+            input{
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+}

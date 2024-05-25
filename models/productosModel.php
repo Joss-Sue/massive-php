@@ -10,7 +10,7 @@ class ProductoClass{
         self::$conexion = BD::crearInstancia();
     }
 
-    static function registrarProducto($nombre, $descripcion, $cotizable, $precio, $stock, $vendedor, $categoria){
+    static function registrarCotizacion($nombre, $descripcion, $cotizable, $precio, $stock, $vendedor, $categoria){
         self::inicializarConexion();
         
         try{
