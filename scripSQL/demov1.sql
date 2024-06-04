@@ -338,3 +338,38 @@ BEGIN
         END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE BuscarProductos(IN valor1 VARCHAR(255))
+BEGIN
+    SELECT * FROM productos
+    WHERE nombreProd LIKE CONCAT('%', valor1, '%')
+    OR descripcionProd LIKE CONCAT('%', valor1, '%')
+    and activoProd = 1
+    order by fchCreacionProd desc limit 20;
+END //
+DELIMITER ;
+
+drop trigger after_user_insert;
+DELIMITER //
+	CREATE TRIGGER after_user_insert
+	AFTER INSERT
+		ON usuarios FOR EACH ROW
+	BEGIN
+		INSERT INTO carritos(usuarioCart) VALUES (NEW.iduser);
+        INSERT INTO listas(usuarioLista) VALUES (NEW.iduser);
+	END;
+	//
+    DELIMITER ;
+
+        drop procedure getUser;
+    DELIMITER //
+CREATE PROCEDURE getUser( in param_correo VARCHAR(255))
+BEGIN
+	select usuarios.iduser, usuarios.contrasena, usuarios.nombre, usuarios.tipo_usuario, carritos.idCart as carritoID, listas.id as listaID 
+    from usuarios inner join carritos 
+    on usuarios.iduser = carritos.usuarioCart
+    inner join listas on usuarios.iduser = listas.usuarioLista 
+    where correo = param_correo;
+END //
+DELIMITER ;

@@ -52,6 +52,8 @@ function matchLogin($correo, $contrasena, $conexion, $isRecordar){
         $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
         $_SESSION['usuario_carrito']=$usuario["carritoID"];
+        $_SESSION['usuario_lista']=$usuario["listaID"];
+        var_dump( $_SESSION['usuario_lista']);
 
         if($isRecordar){
             setcookie('correo',$correo,time()+3600, "/");
@@ -92,6 +94,7 @@ function matchLoginCookie($conexion, $correo, $contrasena){
         $_SESSION['usuario_nombre']=$usuario["nombre"];
         $_SESSION['usuario_tipo']=$usuario["tipo_usuario"];
         $_SESSION['usuario_carrito']=$usuario["carritoID"];
+        $_SESSION['usuario_lista']=$usuario["listaID"];
         setcookie('correo',$correo,time()+3600,"/");
         setcookie('contrasena',$contrasena,time()+3600,"/");
 
