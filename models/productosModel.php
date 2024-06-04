@@ -10,7 +10,7 @@ class ProductoClass{
         self::$conexion = BD::crearInstancia();
     }
 
-    static function registrarCotizacion($nombre, $descripcion, $cotizable, $precio, $stock, $vendedor, $categoria){
+    static function registrarProducto($nombre, $descripcion, $cotizable, $precio, $stock, $vendedor, $categoria){
         self::inicializarConexion();
         
         try{
@@ -175,7 +175,7 @@ class ProductoClass{
         if($_SESSION['usuario_tipo']=="admin"){
             $sql="select * from productos where activoProd = 1 and estaListadoProd = 0 order by fchCreacionProd asc limit 21 offset :pagina";
         }else{
-            $sql="select* from productos where activoProd = 1 order by fchCreacionProd desc limit 2 offset :pagina";
+            $sql="select* from productos where activoProd = 1 and estaListadoProd = 1 order by fchCreacionProd desc limit 20 offset :pagina";
         }
         $sentencia = self::$conexion-> prepare($sql);
         $sentencia->bindValue(':pagina', $pagina, PDO::PARAM_INT);
