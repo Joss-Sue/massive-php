@@ -302,3 +302,39 @@ CREATE TABLE cotizaciones (
      FOREIGN KEY (ClienteId) REFERENCES usuarios(iduser),
      FOREIGN KEY (VendedorId) REFERENCES usuarios(iduser)
 );
+
+CREATE TABLE listas(
+	id int auto_increment primary key,
+    nombre varchar(250),
+    descripcion text,
+    usuarioLista int,
+    activo boolean default 1,
+	fechaLista TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    foreign key (usuarioLista) references usuarios(iduser)
+);
+
+CREATE TABLE listasProductos(
+	id int auto_increment primary key,
+    idLista int,
+    productoLista int,
+    activo boolean default 1,
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    foreign key (productoLista) references productos(idProd),
+    foreign key (idLista) references listas(id)
+);
+
+DELIMITER //
+create procedure agregarProductoLista(in param_idLista int, in param_productoLista int)
+BEGIN
+    IF EXISTS (SELECT 1 FROM listasProductos WHERE idLista = param_idLista and productoLista = param_productoLista and activo = 1) THEN
+            UPDATE listasProductos
+            SET fecha = CURRENT_TIMESTAMP
+            WHERE idLista = param_idLista and productoLista = param_productoLista and activo = 1;
+        ELSE
+            INSERT INTO listasProductos(idLista, productoLista)
+            VALUES(param_idLista, param_productoLista);
+        END IF;
+END //
+DELIMITER ;
