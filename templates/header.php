@@ -26,7 +26,7 @@
                 </span>
             </div>
             <div class="two col cart-user">
-                <img src="./../cart.svg" alt="">
+                <img src="./../whiteCart.svg" alt="">
                 <img src="./../user.svg" alt="">
             </div>
             <div class="one-col"></div>

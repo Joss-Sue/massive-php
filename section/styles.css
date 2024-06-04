@@ -70,15 +70,16 @@ nav .top-nav {
   align-content: space-around;
   justify-content: center;
 }
-nav .top-nav .name-page {
+nav .top-nav .name-page a {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
-nav .top-nav .name-page img {
+nav .top-nav .name-page a img {
   max-width: 46px;
   margin-right: 10px;
 }
-nav .top-nav .name-page span {
+nav .top-nav .name-page a span {
   font-size: 36px;
 }
 nav .top-nav .cart-user {
@@ -86,14 +87,14 @@ nav .top-nav .cart-user {
   align-items: center;
   justify-content: flex-end;
 }
-nav .top-nav .cart-user img:first-child {
-  max-width: 41.5px;
-}
-nav .top-nav .cart-user img:nth-child(2) {
-  max-width: 56px;
-}
 nav .top-nav .cart-user .cart-icon {
   margin-right: 15px;
+}
+nav .top-nav .cart-user .cart-icon img {
+  width: 3vw;
+}
+nav .top-nav .cart-user .user-menu img {
+  width: 4vw;
 }
 nav .top-nav .search-bar {
   display: flex;

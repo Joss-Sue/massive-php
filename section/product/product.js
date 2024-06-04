@@ -30,6 +30,9 @@ function setProduct(productTitle, productDesc, productPrice, productPreviousPric
     $("#product-desc").append(productDesc);
     $("#product-price").append('$' + Number(productPrice));
     $("#product-previous-price").append('$' + (Number(productPreviousPrice) * 2));
+    $("#price-title").append(productTitle);
+    $("#price-desc").append(productDesc);
+    $("#price-price").append('$' + Number(productPrice));
 };
 
 function addToCart(cantidad){
@@ -51,7 +54,12 @@ function addToCart(cantidad){
     });
 }
 
-function newEmail(){
+function addToFavorites(cantidad){
+    //Agregar al carrito
+    console.log('Se agrega el producto ' + Number($("#product_id").val()) + ' a favoritos');
+}
+
+function newPrice(){
     $('#cotizacionModal').modal("show");;
 }
 

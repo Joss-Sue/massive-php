@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-3 cart-user">
                     <a class="cart-icon" href="../../config/cerrarSesion.php">
-                        <img src="../../src/icons/cart.svg" alt="">
+                        <img src="../../src/icons/whiteCart.svg" alt="">
                     </a>
                     <div class="user-menu">
                         <img src="../../src/icons/user.svg" alt="">

@@ -73,30 +73,34 @@ nav {
         align-content: space-around;
         justify-content: center;
 		.name-page {
-			display: flex;
-			align-items: center;
-			img {
-				max-width: 46px;
-                margin-right: 10px;
+			a{
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+				img {
+					max-width: 46px;
+					margin-right: 10px;
+				}
+				span {
+					font-size: 36px;
+				}
 			}
-			span {
-				font-size: 36px;
 			}
-		}
 		.cart-user {
 			display: flex;
 			align-items: center;
 			justify-content: flex-end;
-			img {
-				&:first-child {
-					max-width: 41.5px;
-				}
-				&:nth-child(2) {
-					max-width: 56px;
-				}
-			}
+			
 			.cart-icon{
 				margin-right: 15px;
+				img {
+					width: 3vw;
+				}
+			}
+			.user-menu{
+				img{
+					width: 4vw;
+				}
 			}
 		}
 		.search-bar {

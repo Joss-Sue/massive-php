@@ -1,0 +1,57 @@
+.favorites-list-title {
+  padding: 20px 0px;
+}
+.favorites-list-title h3 {
+  font-size: 2.5vw;
+}
+
+.favorites-list-section .product {
+  background-color: #EDF6F9;
+  display: flex;
+  max-height: 25vh;
+  border: solid #cccece;
+  margin-bottom: 20px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.favorites-list-section .product .left {
+  display: flex;
+}
+.favorites-list-section .product .left img {
+  object-fit: contain;
+  width: 35%;
+  background-color: white;
+}
+.favorites-list-section .product .left .info-cart {
+  margin-left: 20px;
+}
+.favorites-list-section .product .left .info-cart p:first-child {
+  font-size: 30px;
+}
+.favorites-list-section .product .left .info-cart p:nth-child(2) {
+  font-size: 30px;
+}
+.favorites-list-section .product .left .info-cart button {
+  background-color: transparent;
+  border: none;
+  color: #006D77;
+}
+.favorites-list-section .product .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.favorites-list-section .product .right button {
+  width: 6vw;
+  background-color: transparent;
+  border: none;
+}
+.favorites-list-section .product .right button:focus {
+  outline: none;
+}
+.favorites-list-section .product .right button img {
+  width: 3vw;
+}
+
+/*# sourceMappingURL=favorites.css.map */

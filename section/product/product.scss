@@ -35,7 +35,72 @@ $massive-blue: #006D77;
                     
                 }
             }
+            .buttons-second-container,
             .buttons-container{
+                button{
+                    max-height: 7vh;
+                    background-color: $massive-blue;
+                    border-radius: 5px;
+                    border: none;
+                    color: white;
+                    padding: 10px;
+                    margin: 2px 0px;
+                    &:hover{
+                        color: $massive-blue;
+                        background-color: white;
+                        transition: ease-in-out;
+                        transition-duration: .3s;
+                        svg{
+                            .cls-1{
+                                fill: #006d77;
+                            }
+                        }
+                    }
+                    svg{
+                        width: 1.5vw;
+                    }
+                }
+            }
+            .buttons-container{
+                button{
+                    &:first-child{
+                        width: 11vw;
+                    }
+                    &:nth-child(2){
+                        width: 3vw;
+                    }
+                }
+            }
+            .buttons-second-container{
+                button{
+                    width: 14.4vw;
+                }
+            }
+        }
+    }
+}
+
+#cotizacionModal{
+    .modal-content{
+        padding: 20px;
+        .cotizacion-header{
+            color: $massive-blue;
+            h3{
+                padding: 10px;
+            }
+        }
+        .cotizacion-body{
+            padding: 10px;
+            p{
+                font-size: 20px;
+            }
+            div{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
                 button{
                     background-color: $massive-blue;
                     border-radius: 5px;
@@ -49,46 +114,10 @@ $massive-blue: #006D77;
                         transition-duration: .3s;
                     }
                 }
-            }
-        }
-    }
-}
-
-#cotizacionModal{
-    .cotizacion-header{
-        color: $massive-blue;
-        h3{
-            padding: 10px;
-        }
-    }
-    .cotizacion-body{
-        padding: 10px;
-        p{
-            font-size: 20px;
-        }
-        div{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            button{
-                background-color: $massive-blue;
-                border-radius: 5px;
-                border: none;
-                color: white;
-                padding: 10px;
-                &:hover{
-                    color: $massive-blue;
-                    background-color: white;
-                    transition: ease-in-out;
-                    transition-duration: .3s;
-                }
-            }
-            input{
-                &:focus{
-                    outline: none;
+                input{
+                    &:focus{
+                        outline: none;
+                    }
                 }
             }
         }
