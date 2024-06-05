@@ -69,7 +69,7 @@ class ListasProductosClass{
     static function buscarAllProductos($id){
 
         self::inicializarConexion();
-        $sql="SELECT p.nombreProd, p.descripcionProd, p.precioProd
+        $sql="SELECT p.nombreProd, p.descripcionProd, p.precioProd, p.idProd
         FROM productos AS p
         JOIN listasProductos AS lp ON p.idProd = lp.productoLista
         where lp.idLista = :id and activo = 1";
