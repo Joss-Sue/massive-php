@@ -32,22 +32,7 @@
 <section class="favorites-list-section">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div class="product">
-                    <div class="left">
-                        <img src="../products/test.jpg" alt="">
-                        <div class="info-cart">
-                            <p>Tennis Nike</p>
-                            <p>$1500</p>
-                            <button>Eliminar</button>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <button>
-                            <img src="../../src/icons/blackCart.svg" alt="">
-                        </button>
-                    </div>
-                </div>
+            <div class="col-12" id="product-list">
             </div>
         </div>
     </div>

@@ -1,5 +1,12 @@
-$massive-blue: #006D77;
+$white: white;
+$color_2: #36393B;
+$color_3: #5BBA2E;
 $font-family_1: "Inter", sans-serif;
+$font-family_2: "Bebas Neue", sans-serif;
+$massive-blue: #006D77;
+$mint: #DCEDEF;
+$white: #EDF6F9;
+$bone: #E4E4E4;
 
 .cotizaciones-to-auth-section{
     div{
@@ -14,7 +21,22 @@ $font-family_1: "Inter", sans-serif;
                         &:not(:first-child) {
                             th{
                                 font-weight: 400 !important;
-                                border: solid #006D77 2px;
+                                border: solid $massive-blue 2px;
+                                button{
+                                    max-height: 7vh;
+                                    border-radius: 5px;
+                                    border: none;
+                                    padding: 10px;
+                                    margin: 2px 0px;
+                                    color: $massive-blue;
+                                    background-color: white;
+                                    &:hover{
+                                        background-color: $massive-blue;
+                                        color: white;
+                                        transition: ease-in-out;
+                                        transition-duration: .3s;
+                                    }
+                                }
                             }
                         }
                         &:first-child{

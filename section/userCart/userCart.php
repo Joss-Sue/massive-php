@@ -41,7 +41,7 @@
                         <p>Total</p>
                         <p class="cart-total"></p>
                     </div>
-                    <span><button>PAGAR</button></span>
+                    <span><button id="payButton" onclick="finishPayment()">PAGAR</button></span>
                 </div>
             </div>
         </div>

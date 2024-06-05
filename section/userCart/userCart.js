@@ -7,16 +7,19 @@ $( document ).ready(function() {
         session = JSON.parse(data);
         getCartProducts(session.usuario_carrito);
     });
+    $('#payButton').prop('disabled', true);
+    $('#payButton').addClass("unclickable");
 });
 
 function getCartProducts(cartId){
-    console.log('intenta traer carro');
     $.ajax({
         type: "GET",
         url: "../../api/productosCarritoController.php/?idCarrito=" + cartId,
         success: function(response) {
             console.log(JSON.parse(response));
             JSON.parse(response).forEach(function(row) {
+                $('#payButton').prop('disabled', false);
+                $('#payButton').removeClass("unclickable");
                 $("#product-list").append(setProduct(row.nombreProd, row.precioProd, row.cantidad));
                 total += Number(row.subtotal);
             });
@@ -29,7 +32,8 @@ function getCartProducts(cartId){
     });
 }
 
-function hacerCompra(){
+function finishPayment(){
+    console.log('hacer compra');
     // $.ajax({
     //     type: "POST",
     //     url: "../../api/productosCarritoController.php",

@@ -29,10 +29,15 @@ $white: #EDF6F9;
             .info-cart{
                 margin-left: 20px;
                 p{
+                    margin: 0px;
                     &:first-child{
                         font-size: 30px;
                     }
                     &:nth-child(2){
+                        font-size: 15px;
+                        margin-bottom: 15px;
+                    }
+                    &:nth-child(3){
                         font-size: 30px;
                     }
                 }

@@ -16,7 +16,7 @@ function getProduct(productId){
         success: function(response) {
             console.log(JSON.parse(response));
             product = JSON.parse(response);
-            setProduct(product.nombreProd, product.descripcionProd, product.precioProd, product.precioProd);
+            setProduct(product.nombreProd, product.descripcionProd, product.precioProd, product.precioProd, product.cotizable);
         },
         error: function(xhr, status, error) {
             console.log('error');
@@ -25,7 +25,7 @@ function getProduct(productId){
     });
 };
 
-function setProduct(productTitle, productDesc, productPrice, productPreviousPrice){
+function setProduct(productTitle, productDesc, productPrice, productPreviousPrice, newPrice){
     $("#product-title").append(productTitle);
     $("#product-desc").append(productDesc);
     $("#product-price").append('$' + Number(productPrice));
@@ -33,6 +33,9 @@ function setProduct(productTitle, productDesc, productPrice, productPreviousPric
     $("#price-title").append(productTitle);
     $("#price-desc").append(productDesc);
     $("#price-price").append('$' + Number(productPrice));
+    if(!newPrice){
+        $("#newPrice").hide();
+    }
 };
 
 function addToCart(cantidad){
@@ -54,9 +57,22 @@ function addToCart(cantidad){
     });
 }
 
-function addToFavorites(cantidad){
-    //Agregar al carrito
-    console.log('Se agrega el producto ' + Number($("#product_id").val()) + ' a favoritos');
+function addToFavorites(){
+    $.ajax({
+        type: "POST",
+        url: "../../api/listasProductosController.php",
+        data: {
+            idLista: session.usuario_lista,
+            idProducto: Number($("#product_id").val())
+        },
+        success: function(data) {
+            alert('Producto agregado a tu Lista de favoritos.');
+        },
+        error: function(xhr, status, error) {
+            console.log('error');
+            console.log(error);
+        },
+    });
 }
 
 function newPrice(){
@@ -77,7 +93,7 @@ function solicitarCotizacion(){
                 Estatus: 0
             },
             success: function(data) {
-                console.log('se registró la cotización');
+                alert('Se solicitó el ajuste de precio.');
             },
             error: function(xhr, status, error) {
                 console.log('error');

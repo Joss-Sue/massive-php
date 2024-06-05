@@ -8,10 +8,25 @@
   font-weight: 400 !important;
   border: solid #006D77 2px;
 }
+.cotizaciones-to-auth-section div div div table tr:not(:first-child) th button {
+  max-height: 7vh;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  margin: 2px 0px;
+  color: #006D77;
+  background-color: white;
+}
+.cotizaciones-to-auth-section div div div table tr:not(:first-child) th button:hover {
+  background-color: #006D77;
+  color: white;
+  transition: ease-in-out;
+  transition-duration: 0.3s;
+}
 .cotizaciones-to-auth-section div div div table tr:first-child th {
   border: solid #006D77 2px;
   background-color: #006D77;
   color: white;
 }
 
-/*# sourceMappingURL=cotizacionesAuth.css.map */
+/*# sourceMappingURL=cotizacionesauth.css.map */

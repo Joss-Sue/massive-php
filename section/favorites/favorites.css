@@ -26,10 +26,17 @@
 .favorites-list-section .product .left .info-cart {
   margin-left: 20px;
 }
+.favorites-list-section .product .left .info-cart p {
+  margin: 0px;
+}
 .favorites-list-section .product .left .info-cart p:first-child {
   font-size: 30px;
 }
 .favorites-list-section .product .left .info-cart p:nth-child(2) {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+.favorites-list-section .product .left .info-cart p:nth-child(3) {
   font-size: 30px;
 }
 .favorites-list-section .product .left .info-cart button {

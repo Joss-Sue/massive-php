@@ -59,6 +59,13 @@ $white: #EDF6F9;
                         transition-duration: .3s;
                     }
                 }
+                .unclickable{
+                    color: $massive-blue;
+                    background-color: white;
+                    &:hover{
+                        cursor: not-allowed;
+                    }
+                }
             }
             div{
                 display: flex;

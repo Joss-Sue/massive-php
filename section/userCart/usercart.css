@@ -55,6 +55,13 @@
   transition: ease-in-out;
   transition-duration: 0.3s;
 }
+.userCart-body .cart-container .carrito-resumen span .unclickable {
+  color: #006D77;
+  background-color: white;
+}
+.userCart-body .cart-container .carrito-resumen span .unclickable:hover {
+  cursor: not-allowed;
+}
 .userCart-body .cart-container .carrito-resumen div {
   display: flex;
   flex-direction: row;
