@@ -81,7 +81,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json{"id":2}*/
             $data = json_decode(file_get_contents('php://input'), true);
-            $id = (isset($data['id']))?($data['id']):null;
+            $stock = $_POST['id'];
             
             if(empty($id)){
                 http_response_code(400);
@@ -91,11 +91,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $resultadoFuncion = ListasClass::eliminarProducto($data['id']);
             if ($resultadoFuncion[0]){
-                http_response_code(200);
-                echo json_encode(array("status" => "success", "message" => $resultadoFuncion[1]));
+                    http_response_code(200);
+                    $json_response = ["success" => true];
+                    echo json_encode($json_response);
                }else{
-                http_response_code(400);
-                echo json_encode(array("status" => "error", "message" => $resultadoFuncion[1]));
+                    http_response_code(400);
+                    $json_response = ["error" => true];
+                    echo json_encode($json_response);
                 }
             break;
         }

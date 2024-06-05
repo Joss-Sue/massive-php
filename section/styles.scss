@@ -106,7 +106,7 @@ nav {
 		.search-bar {
 			display: flex;
 			align-items: center;
-			span {
+			form {
 				display: flex;
 				background-color: $white;
 				width: 40%;
@@ -118,8 +118,14 @@ nav {
 						outline: none;
 					}
 				}
-				img {
-					width: 80%;
+				button{
+					border: none;
+					&:focus{
+						outline: none;
+					}
+					img {
+						width: 100%;
+					}
 				}
 			}
 		}

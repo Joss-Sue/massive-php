@@ -5,7 +5,12 @@ $( document ).ready(function() {
     $.get('../../api/getsession.php', function (data) {
         session = JSON.parse(data);
     });
-    getProducts();
+    if($("#search-bar").val()){
+        $("#search-key").append('Resultados para: ' + $("#search-bar").val());
+        getProductsByWord($("#search-bar").val());
+    }else{
+        getProducts();
+    }
 });
 
 function getProducts(){
@@ -14,6 +19,26 @@ function getProducts(){
         url: "../../api/productosController.php/?pagina=1",
         success: function(response) {
             console.log(JSON.parse(response));
+            var htmlRow = '<div class="row">';
+            JSON.parse(response).forEach(function(row) {
+                htmlRow +=createProductElement(row.idProd, row.nombreProd, row.descripcionProd, row.precioProd);
+            });
+            htmlRow += '</div>';
+            $('.products-container').append(htmlRow);
+        },
+        error: function(xhr, status, error) {
+            alert('Error al cargar los productos del vendedor');
+            console.log('error');
+            console.log(error);
+        },
+    });
+};
+
+function getProductsByWord(palabra){
+    $.ajax({
+        type: "GET",
+        url: "../../api/buscadorController.php/?palabra=" + palabra,
+        success: function(response) {
             var htmlRow = '<div class="row">';
             JSON.parse(response).forEach(function(row) {
                 htmlRow +=createProductElement(row.idProd, row.nombreProd, row.descripcionProd, row.precioProd);

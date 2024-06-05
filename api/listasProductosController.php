@@ -55,7 +55,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json{"id":2}*/
             $data = json_decode(file_get_contents('php://input'), true);
-            $id = (isset($data['id']))?($data['id']):null;
+            $id = isset($data['id']) ? $data['id'] : null;
             
             if(empty($id)){
                 http_response_code(400);

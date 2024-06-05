@@ -100,21 +100,27 @@ nav .top-nav .search-bar {
   display: flex;
   align-items: center;
 }
-nav .top-nav .search-bar span {
+nav .top-nav .search-bar form {
   display: flex;
   background-color: #EDF6F9;
   width: 40%;
 }
-nav .top-nav .search-bar span input {
+nav .top-nav .search-bar form input {
   background-color: #EDF6F9;
   border: none;
   width: 250px;
 }
-nav .top-nav .search-bar span input:focus {
+nav .top-nav .search-bar form input:focus {
   outline: none;
 }
-nav .top-nav .search-bar span img {
-  width: 80%;
+nav .top-nav .search-bar form button {
+  border: none;
+}
+nav .top-nav .search-bar form button:focus {
+  outline: none;
+}
+nav .top-nav .search-bar form button img {
+  width: 100%;
 }
 nav .bottom-nav {
   background-color: #E4E4E4;
