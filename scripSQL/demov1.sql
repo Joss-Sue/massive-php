@@ -412,7 +412,7 @@ BEGIN
     SELECT 
         productosCarrito.cantidad, 
         productos.nombreProd, 
-        productosCarrito.precioCarrito, 
+        productosCarrito.precioCarrito as precioProd,  
         productosCarrito.precioCarrito * productosCarrito.cantidad as subtotal
     FROM 
         productosCarrito 
