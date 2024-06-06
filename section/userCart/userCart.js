@@ -56,3 +56,23 @@ function setProduct(producto, precio, cantidad){
     var tag =  '<div class="product"><img src="../products/test.jpg" alt=""><div class="info-cart"><p>' + producto + '</p><p>$' + Number(precio) + '</p><button>Eliminar</button></div><div class="quantity">(' + cantidad + ')</div></div>';
     return tag;
 }
+
+paypal.Buttons({
+    createOrder: function (data, actions) {
+       // Actualiza el precio antes de crear la orden
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            currency_code: 'MXN',
+            value: "199.99" // Usa el precio calculado
+          }
+        }]
+      });
+    },
+    onApprove: function (data, actions) {
+      return actions.order.capture().then(function (details) {
+        //window.location.href = "../dashboard/dashboard.php";
+        alert('¡Transacción completada por ' + details.payer.name.given_name + '!');
+      });
+    }
+  }).render('#paypal-button-container')

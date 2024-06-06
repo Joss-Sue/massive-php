@@ -42,10 +42,14 @@
                         <p class="cart-total"></p>
                     </div>
                     <span><button id="payButton" onclick="finishPayment()">PAGAR</button></span>
+                    <div id="paypal-button-container"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AaDnChw9DFweiZrrGcdkl_ezFjldcnTgKPpW3uLlVzQQ9P2Ms4XN3OcBxma8Q5ALaax_zOfMmReNxoJq&currency=MXN&locale=es_MX"></script>
+
     
 <?php include("../../templates/pie.php"); ?>
