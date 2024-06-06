@@ -277,7 +277,7 @@ BEGIN
     SELECT 
         productosCarrito.cantidad, 
         productos.nombreProd, 
-        productos.precioProd, 
+        productos.precioProd as precioProd, 
         productos.precioProd * productosCarrito.cantidad as subtotal
     FROM 
         productosCarrito 
@@ -371,5 +371,101 @@ BEGIN
     on usuarios.iduser = carritos.usuarioCart
     inner join listas on usuarios.iduser = listas.usuarioLista 
     where correo = param_correo;
+END //
+DELIMITER ;
+
+-- /////////////////////// modificaciones para que funcionen los cotizables
+
+ alter table productosCarrito add column  precioCarrito DECIMAL(10, 2);
+  alter table ventas add column precio decimal(10,2);
+
+    drop procedure   ActualizarInsertarCarrito;
+    DELIMITER //
+    CREATE PROCEDURE ActualizarInsertarCarrito(
+        IN param_idCarrito INT,
+        IN param_Cantidad INT,
+        IN param_carritoProduc INT,
+        IN param_precioCarrito decimal(10,2)
+    )
+    BEGIN
+        IF EXISTS (SELECT 1 FROM productosCarrito WHERE productoID = param_carritoProduc and idCarrito = param_idCarrito and activo = 1) THEN
+            UPDATE productosCarrito
+            SET cantidad = cantidad + param_Cantidad
+            WHERE productoID = param_carritoProduc AND idCarrito = param_idCarrito and activo=1;
+        ELSE
+            INSERT INTO productosCarrito(idCarrito, cantidad, productoID, precioCarrito)
+            VALUES(param_idCarrito, param_Cantidad, param_carritoProduc, param_precioCarrito);
+            UPDATE carritos SET totalItems = totalItems + 1 WHERE idCart = param_idCarrito;
+        END IF;
+		update carritos
+		Set totalCosto = (SELECT SUM(productosCarrito.cantidad * productosCarrito.precioCarrito) AS costo_total
+		FROM productosCarrito
+		WHERE productosCarrito.idCarrito = param_idCarrito and activo = 1 ) where idCart = param_idCarrito;
+    END //
+    DELIMITER ;
+
+        drop procedure  if exists getProductosCarrito;
+        DELIMITER //
+    CREATE PROCEDURE GetProductosCarrito(IN carritoID INT)
+BEGIN
+    SELECT 
+        productosCarrito.cantidad, 
+        productos.nombreProd, 
+        productosCarrito.precioCarrito, 
+        productosCarrito.precioCarrito * productosCarrito.cantidad as subtotal
+    FROM 
+        productosCarrito 
+    JOIN 
+        productos ON productosCarrito.productoID = productos.idProd
+    WHERE productosCarrito.idCarrito = carritoID and  productosCarrito.activo = 1
+	order by productosCarrito.idProdCarrito desc;
+END //
+DELIMITER ;
+
+
+    drop procedure if exists crearPedido;
+    DELIMITER //
+CREATE PROCEDURE crearPedido(in param_idCarrito int, in param_idUsario int)
+BEGIN
+    DECLARE _totalCosto decimal(10,2);
+    DECLARE _precioCarrito decimal(10,2);
+    DECLARE _productoID int;
+    DECLARE _cantidad int;
+    DECLARE param_last_id int;
+    DECLARE done INT DEFAULT FALSE;
+    
+    -- Cursor para iterar sobre los productos del carrito
+    DECLARE cur CURSOR FOR SELECT productoID, cantidad, precioCarrito FROM productosCarrito WHERE idCarrito = param_idCarrito and activo = 1;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    -- Obtenemos el totalCosto del carrito
+    SELECT totalCosto into _totalCosto from carritos where idCart = param_idCarrito;
+
+    -- Insertamos en la tabla pedidos
+    INSERT INTO pedidos (totalPedido, idUsuarioPedido) VALUES (_totalCosto, param_idUsario);
+
+    -- Obtenemos el ID generado por el auto_increment
+    SET param_last_id = LAST_INSERT_ID();
+
+    -- Abrimos el cursor
+    OPEN cur;
+
+    -- Iteramos sobre cada producto del carrito
+    read_loop: LOOP
+        FETCH cur INTO _productoID, _cantidad, _precioCarrito;
+
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+select * from ventas;
+        -- Insertamos en la tabla ventas
+        INSERT INTO ventas (articulosTotales, idPedido, idProductoVenta, precio) VALUES (_cantidad, param_last_id, _productoID, _precioCarrito);
+
+        -- Actualizamos el campo activo en productosCarrito
+        UPDATE productosCarrito SET activo = 0 WHERE productoID = _productoID AND idCarrito = param_idCarrito;
+    END LOOP;
+
+    -- Cerramos el cursor
+    CLOSE cur;
+    update carritos set totalCosto = 0.00 where idCart = param_idCarrito;
 END //
 DELIMITER ;
