@@ -378,6 +378,7 @@ DELIMITER ;
 
  alter table productosCarrito add column  precioCarrito DECIMAL(10, 2);
   alter table ventas add column precio decimal(10,2);
+  alter table ventas add column fechaVenta DATETIME DEFAULT CURRENT_TIMESTAMP;
 
     drop procedure   ActualizarInsertarCarrito;
     DELIMITER //
