@@ -20,16 +20,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
         {
             /*ejemplo json{"idCarrito":5, "cantidad":1, "productoID":2, "precioCarrito":163.70}*/
 
-            //$idCarrito = $_POST['idCarrito'];
-            //$cantidad = $_POST['cantidad'];
-            //$productoID = $_POST['productoID'];
+            $idCarrito = $_POST['idCarrito'];
+            $cantidad = $_POST['cantidad'];
+            $productoID = $_POST['productoID'];
+            $precioCarrito = $_POST['precioCarrito'];
 
             $data = json_decode(file_get_contents('php://input'), true);
-            extract($data);
             
             if(empty($idCarrito) || empty($cantidad) || empty($productoID) || empty($precioCarrito)){
                 http_response_code(400);
-                echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
+                $json_response = ["error" => true];
+                echo json_encode($json_response);
             }
 
             $resultadoFuncion = ProductosCarritoClass::registrarProducto($idCarrito,$cantidad,$productoID, $precioCarrito);

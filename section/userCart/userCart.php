@@ -41,7 +41,6 @@
                         <p>Total</p>
                         <p class="cart-total"></p>
                     </div>
-                    <span><button id="payButton" onclick="finishPayment()">PAGAR</button></span>
                     <div id="paypal-button-container"></div>
                 </div>
             </div>

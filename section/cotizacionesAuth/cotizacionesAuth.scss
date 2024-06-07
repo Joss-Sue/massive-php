@@ -8,6 +8,10 @@ $mint: #DCEDEF;
 $white: #EDF6F9;
 $bone: #E4E4E4;
 
+.cotizaciones-auth-title{
+    padding: 15px 0px;
+}
+
 .cotizaciones-to-auth-section{
     div{
         div{
@@ -30,8 +34,18 @@ $bone: #E4E4E4;
                                     margin: 2px 0px;
                                     color: $massive-blue;
                                     background-color: white;
+                                }
+                                .authButton{
                                     &:hover{
                                         background-color: $massive-blue;
+                                        color: white;
+                                        transition: ease-in-out;
+                                        transition-duration: .3s;
+                                    }
+                                }
+                                .rejectButton{
+                                    &:hover{
+                                        background-color: red;
                                         color: white;
                                         transition: ease-in-out;
                                         transition-duration: .3s;

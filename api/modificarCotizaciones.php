@@ -10,11 +10,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'POST':
         {
-
+            $idCotizacion = $_POST['idCotizacion'];
+            $estatus = $_POST['estatus'];
             
             //http://localhost/gitMassive/massive-php/api/modificarCotizaciones.php/ {"idCotizacion":"2","estatus":"1"}
             $data = json_decode(file_get_contents('php://input'), true);
-            extract($data);
             
             if(empty($idCotizacion) || empty($estatus)){
                 http_response_code(400);

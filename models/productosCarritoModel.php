@@ -57,7 +57,6 @@ class ProductosCarritoClass{
         self::inicializarConexion();
         $categoria = ProductosCarritoClass::buscarProductoByID($id);
         
-    
         if($categoria==null) {
            return array(false, "error en id");
         }
@@ -70,7 +69,6 @@ class ProductosCarritoClass{
         }catch(PDOException $e){
             return array(false, "Error al eliminar el producto del carrito: " . $e->getMessage());
         }
-                                
     }
 
     static function buscarProductoByID($id){

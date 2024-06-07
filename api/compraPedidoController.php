@@ -35,31 +35,34 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
     case 'POST':
         {
+            $idCarrito = $_POST['idCarrito'];
+            $idUsuario = $_POST['idUsuario'];
             
             $data = json_decode(file_get_contents('php://input'), true);
-
-                extract($data);
                 
-                if(empty($idCarrito) || empty($idUsuario)){
-                    http_response_code(400);
-                    echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
-                    exit;
-                }
-                $conexion=BD::crearInstancia();
-                
-                
-                $resultadoFuncion = registrarProducto($idCarrito,$idUsuario,$conexion);
-
-               if ($resultadoFuncion[0]){
-                http_response_code(200);
-                echo json_encode(array("status" => "success", "message" => $resultadoFuncion[1]));
-               }else{
+            if(empty($idCarrito) || empty($idUsuario)){
                 http_response_code(400);
-                echo json_encode(array("status" => "error", "message" => $resultadoFuncion[1]));
+                echo json_encode(array("status" => "error", "message" => "algun dato vacio"));
                 exit;
-                }
+            }
 
-               break;
+            $conexion=BD::crearInstancia();
+            
+            $resultadoFuncion = registrarProducto($idCarrito,$idUsuario,$conexion);
+
+            if ($resultadoFuncion[0]){
+                http_response_code(200);
+                $json_response = ["success" => true];
+                echo json_encode($json_response);
+                exit;
+            }else{
+                http_response_code(400);
+                $json_response = ["error" => true];
+                echo json_encode($json_response);
+                exit;
+            }
+
+            break;
             }
     default:
         http_response_code(405);

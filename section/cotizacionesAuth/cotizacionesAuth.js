@@ -6,17 +6,17 @@ $( document ).ready(function() {
     $.get('../../api/getsession.php', function (data) {
         session = JSON.parse(data);
         if(session.usuario_tipo == 'comprador'){
-            getCotizacionesComprador(session.usuario_id);
+            getCotizacionesComprador();
         }else if(session.usuario_tipo == 'vendedor'){
-            getCotizacionesVendedor(session.usuario_id);
+            getCotizacionesVendedor();
         }
     });
 });
 
-function getCotizacionesVendedor(userId){
+function getCotizacionesVendedor(){
     $.ajax({
         type: "GET",
-        url: "../../api/cotizacionesController.php/?vendedorId=" + userId,
+        url: "../../api/cotizacionesController.php/?vendedorId=" + session.usuario_id,
         success: function(response) {
             console.log(JSON.parse(response));
             $("#cotizaciones-to-auth").empty();
@@ -30,7 +30,7 @@ function getCotizacionesVendedor(userId){
                 productRow += '<th>' + setStatus(row.Estatus) + '</th>';
                 
                 if(setStatus(row.Estatus) == 'Solicitado'){
-                    productRow += '<th><button action="" onclick="authProduct(' + row.ProductoId + ')">Autorizar cotización</button></th></tr>';
+                    productRow += '<th><button class="authButton" onclick="authProduct(' + row.idCart + ', ' + row.ProductoId + ', ' + row.PrecioSolicitado + ', ' + row.Id + ', 1)">Autorizar cotización</button><button class="rejectButton" onclick="rejectProduct(' + row.Id + ', 2)">Rechazar cotización</button></th></tr>';
                 }else{
                     productRow += '<th></th></tr>';
                 }
@@ -44,10 +44,10 @@ function getCotizacionesVendedor(userId){
     });
 }
 
-function getCotizacionesComprador(userId){
+function getCotizacionesComprador(){
     $.ajax({
         type: "GET",
-        url: "../../api/cotizacionesController.php/?clientId=" + userId,
+        url: "../../api/cotizacionesController.php/?clientId=" + session.usuario_id,
         success: function(response) {
             console.log(JSON.parse(response));
             $("#cotizaciones-to-auth").empty();
@@ -70,9 +70,15 @@ function getCotizacionesComprador(userId){
 
 }
 
-function authProduct(productId){
-    console.log('autorizar');
-    console.log(productId);
+function authProduct(cartId, productId, price, Id, status){
+    addToCart(cartId, productId, price);
+    setNewStatus(Id, status);
+    getCotizacionesVendedor();
+}
+
+function rejectProduct(Id, status){
+    setNewStatus(Id, status);
+    getCotizacionesVendedor();
 }
 
 function setStatus(status){
@@ -86,4 +92,41 @@ function setStatus(status){
         default:
             return 'Sin estatus';
     }
+}
+
+function addToCart(cartId, productId, price){
+    $.ajax({
+        type: "POST",
+        url: "../../api/productosCarritoController.php",
+        data: {
+            idCarrito: cartId,
+            cantidad: 1,
+            productoID: productId,
+            precioCarrito: Number(price)
+        },
+        success: function(data) {
+            alert('Producto agregado al carrito');
+        },
+        error: function(xhr, status, error) {
+            console.log('error');
+            console.log(error);
+        },
+    });
+}
+
+function setNewStatus(idCotizacion, estatus){
+    $.ajax({
+        type: "POST",
+        url: "../../api/modificarCotizaciones.php",
+        data: {
+            idCotizacion: idCotizacion,
+            estatus: estatus
+        },
+        success: function(data) {
+        },
+        error: function(xhr, status, error) {
+            console.log('error');
+            console.log(error);
+        },
+    });
 }

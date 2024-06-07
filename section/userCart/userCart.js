@@ -26,6 +26,9 @@ function getCartProducts(cartId){
             $(".cart-total").append('$' + total);
         },
         error: function(xhr, status, error) {
+            $("#product-list").append('<h5>No hay productos en tu carrito.</h5>');
+            //$("#paypal-button-container").hide();
+            $("#paypal-button-container").css({"pointer-events": "none", "opacity": ".7"});
             console.log('error');
             console.log(error);
         },
@@ -34,22 +37,22 @@ function getCartProducts(cartId){
 
 function finishPayment(){
     console.log('hacer compra');
-    // $.ajax({
-    //     type: "POST",
-    //     url: "../../api/productosCarritoController.php",
-    //     data: {
-    //         idCarrito: session.usuario_carrito,
-    //         cantidad: cantidad,
-    //         productoID: Number($("#product_id").val())
-    //     },
-    //     success: function(data) {
-    //         alert('Producto agregado al carrito');
-    //     },
-    //     error: function(xhr, status, error) {
-    //         console.log('error');
-    //         console.log(error);
-    //     },
-    // });
+    $.ajax({
+      type: "POST",
+      url: "../../api/compraPedidoController.php",
+      data: {
+          idCarrito: session.usuario_carrito,
+          idUsuario: session.usuario_id
+      },
+      success: function(data) {
+          alert('Compra finalizada');
+          window.location.reload();
+      },
+      error: function(xhr, status, error) {
+          console.log('error');
+          console.log(error);
+      },
+  });
 }
 
 function setProduct(producto, precio, cantidad){
@@ -64,15 +67,14 @@ paypal.Buttons({
         purchase_units: [{
           amount: {
             currency_code: 'MXN',
-            value: "199.99" // Usa el precio calculado
+            value: total.toString() // Usa el precio calculado
           }
         }]
       });
     },
     onApprove: function (data, actions) {
       return actions.order.capture().then(function (details) {
-        //window.location.href = "../dashboard/dashboard.php";
-        alert('¡Transacción completada por ' + details.payer.name.given_name + '!');
+        finishPayment();
       });
     }
   }).render('#paypal-button-container')

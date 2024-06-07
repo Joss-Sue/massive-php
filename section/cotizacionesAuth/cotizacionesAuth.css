@@ -1,3 +1,7 @@
+.cotizaciones-auth-title {
+  padding: 15px 0px;
+}
+
 .cotizaciones-to-auth-section div div div table {
   font-family: "Inter", sans-serif;
 }
@@ -17,8 +21,14 @@
   color: #006D77;
   background-color: white;
 }
-.cotizaciones-to-auth-section div div div table tr:not(:first-child) th button:hover {
+.cotizaciones-to-auth-section div div div table tr:not(:first-child) th .authButton:hover {
   background-color: #006D77;
+  color: white;
+  transition: ease-in-out;
+  transition-duration: 0.3s;
+}
+.cotizaciones-to-auth-section div div div table tr:not(:first-child) th .rejectButton:hover {
+  background-color: red;
   color: white;
   transition: ease-in-out;
   transition-duration: 0.3s;

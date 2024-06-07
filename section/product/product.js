@@ -39,13 +39,15 @@ function setProduct(productTitle, productDesc, productPrice, productPreviousPric
 };
 
 function addToCart(cantidad){
+    console.log(Number(product.precioProd));
     $.ajax({
         type: "POST",
         url: "../../api/productosCarritoController.php",
         data: {
             idCarrito: session.usuario_carrito,
             cantidad: cantidad,
-            productoID: Number($("#product_id").val())
+            productoID: Number($("#product_id").val()),
+            precioCarrito: Number(product.precioProd)
         },
         success: function(data) {
             alert('Producto agregado al carrito');
@@ -94,6 +96,7 @@ function solicitarCotizacion(){
             },
             success: function(data) {
                 alert('Se solicitó el ajuste de precio.');
+                $('#cotizacionModal').modal("hide");
             },
             error: function(xhr, status, error) {
                 console.log('error');
