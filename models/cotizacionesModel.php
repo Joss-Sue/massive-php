@@ -68,5 +68,28 @@ class CotizacionClass{
         }
     }
 
+    static function estatusCotizacion($idCotizacion, $estatus){
+        self::inicializarConexion();
+
+        try{
+            $sqlInsert="update cotizaciones set Estatus = :estatus where id = :idCotizacion";
+            $consultaInsert= self::$conexion->prepare($sqlInsert);
+            $consultaInsert->execute([
+                ':idCotizacion'=>$idCotizacion,
+                ':estatus'=>$estatus
+                                    ]);
+            return array(true,"insertado con exito");
+            
+            }catch(PDOException $e){
+                if ($e->errorInfo[1] == 1062) {
+                    $cadena = "La cotizacion ya ha sido registrada.";
+                    return array(false, $cadena);
+                } else {
+                    return array(false, "Error al crear la cotiacion: " . $e->getMessage());
+                }
+            }
+    }
+
+
 }
 ?>
