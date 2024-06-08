@@ -94,7 +94,7 @@ function obtenerPedidos($idUsuario, $conexion){
     
     
     try{
-        $sqlInsert="select id, totalPedido from pedidos where idUsuarioPedido = :idUsuario order by fechaPedido";
+        $sqlInsert="select id, totalPedido, fechaPedido, estatusPedido from pedidos where idUsuarioPedido = :idUsuario order by fechaPedido desc";
         $consultaInsert= $conexion->prepare($sqlInsert);
         $consultaInsert ->bindValue(':idUsuario', $idUsuario, PDO::PARAM_INT);
         $consultaInsert->execute();
@@ -108,7 +108,7 @@ function obtenerPedidos($idUsuario, $conexion){
         
            
             foreach ($pedidos as $indice => $pedido) {
-                $sqlQuery="SELECT ventas.articulosTotales, productos.nombreProd
+                $sqlQuery="SELECT ventas.articulosTotales, productos.nombreProd, productos.descripcionProd, productos.idProd
                 FROM ventas
                 JOIN productos ON ventas.idProductoVenta = productos.idProd
                 WHERE ventas.idPedido = :idPedido";
