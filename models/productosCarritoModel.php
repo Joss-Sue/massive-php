@@ -61,7 +61,7 @@ class ProductosCarritoClass{
            return array(false, "error en id");
         }
         try{
-        $sqlUpdate="update productosCarrito set activo = false where idProdCarrito = :id";
+        $sqlUpdate=" call eliminarProductoCarrito(:id)";
         $sentencia2 = self::$conexion-> prepare($sqlUpdate);
         $sentencia2 -> execute(['id'=>$id]);
             //echo '<script>alert("You have been logged out.")</script>;'

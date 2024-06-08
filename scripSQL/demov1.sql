@@ -496,3 +496,22 @@ drop procedure   ActualizarInsertarCarrito;
 		WHERE productosCarrito.idCarrito = param_idCarrito and activo = 1 ) where idCart = param_idCarrito;
     END //
     DELIMITER ;
+
+    -- ////// eliminarCarrito
+
+            DELIMITER //
+    CREATE PROCEDURE eliminarProductoCarrito(
+        IN param_id INT
+    )
+    BEGIN
+     Declare _idCarrito int ;
+     select idCarrito into _idCarrito from productosCarrito where idProdCarrito = param_id; 
+         update productosCarrito 
+         set activo = 0 where idProdCarrito = param_id;
+         
+		update carritos
+		Set totalCosto = (SELECT SUM(productosCarrito.cantidad * productosCarrito.precioCarrito) AS costo_total
+		FROM productosCarrito
+		WHERE productosCarrito.idCarrito = _idCarrito and activo = 1 ) where idCart = _idCarrito;
+    END //
+    DELIMITER ;
