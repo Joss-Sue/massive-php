@@ -28,28 +28,24 @@ $font-family_1: "Inter", sans-serif;
         }
     }
     .my-products-section{
-        div{
-            div{
-                div{
-                    table{
-                        font-family: $font-family_1;
-                        tr{
-                            th{
-                                width: 33vw;
-                            }
-                            &:not(:first-child) {
-                                th{
-                                    font-weight: 400 !important;
-                                    border: solid #006D77 2px;
-                                }
-                            }
-                            &:first-child{
-                                th{
-                                    border: solid #006D77 2px;
-                                    background-color: #006D77;
-                                    color: white;
-                                }
-                            }
+        .products-table-container{
+            table{
+                font-family: $font-family_1;
+                tr{
+                    th{
+                        width: 33vw;
+                    }
+                    &:not(:first-child) {
+                        th{
+                            font-weight: 400 !important;
+                            border: solid #006D77 2px;
+                        }
+                    }
+                    &:first-child{
+                        th{
+                            border: solid #006D77 2px;
+                            background-color: #006D77;
+                            color: white;
                         }
                     }
                 }

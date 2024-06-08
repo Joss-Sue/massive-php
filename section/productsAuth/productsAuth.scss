@@ -1,29 +1,47 @@
 $massive-blue: #006D77;
 $font-family_1: "Inter", sans-serif;
 
+.products-auth-title{
+    padding: 10px 0px 10px 0px;
+    h3{
+        font-size: 3.5vw;
+    }
+}
+
 .products-to-auth-section{
-    div{
-        div{
-            div{
-                table{
-                    font-family: $font-family_1;
-                    tr{
-                        th{
-                            width: 33vw;
-                        }
-                        &:not(:first-child) {
-                            th{
-                                font-weight: 400 !important;
-                                border: solid #006D77 2px;
-                            }
-                        }
-                        &:first-child{
-                            th{
-                                border: solid #006D77 2px;
-                                background-color: #006D77;
+    #product-table-container{
+        table{
+            font-family: $font-family_1;
+            tr{
+                th{
+                    width: 33vw;
+                }
+                &:not(:first-child) {
+                    th{
+                        font-weight: 400 !important;
+                        border: solid #006D77 2px;
+                        button{
+                            max-height: 7vh;
+                            border-radius: 5px;
+                            border: none;
+                            padding: 10px;
+                            margin: 2px 0px;
+                            color: $massive-blue;
+                            background-color: white;
+                            &:hover{
+                                background-color: $massive-blue;
                                 color: white;
+                                transition: ease-in-out;
+                                transition-duration: .3s;
                             }
                         }
+                    }
+                }
+                &:first-child{
+                    th{
+                        border: solid #006D77 2px;
+                        background-color: #006D77;
+                        color: white;
                     }
                 }
             }

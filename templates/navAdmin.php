@@ -3,14 +3,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-3 name-page">
-                    <img src="../../src/icons/Massive.svg" alt="">
-                    <span class="bebas white-text">MASSIVE</span>
+                    <a href="../dashboard/dashboard.php">
+                        <img src="../../src/icons/Massive.svg" alt="">
+                        <span class="bebas white-text">MASSIVE</span>
+                    </a>
                 </div>
                 <div class="col-6 search-bar">
-                    <span>
-                        <input type="text" name="" id="" placeholder="Busca algún producto">
-                        <a href=""><img src="../../src/icons/mag-glass.svg" alt=""></a>
-                    </span>
                 </div>
                 <div class="col-3 cart-user">
                     <a class="cart-icon" href="../../config/cerrarSesion.php">
@@ -35,11 +33,6 @@
                 <div class="col-3">
                 </div>
                 <div class="col-6 inter">
-                    <a href="">Electronica</a>
-                    <a href="">Libros</a>
-                    <a href="">Alimentos</a>
-                    <a href="">Hogar</a>
-                    <a href="">Deportes</a>
                 </div>
                 <div class="col-3">
                 </div>

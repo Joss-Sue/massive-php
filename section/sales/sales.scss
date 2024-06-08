@@ -1,0 +1,42 @@
+$font-family_1: "Inter", sans-serif;
+$font-family_2: "Bebas Neue", sans-serif;
+$massive-blue: #006D77;
+$mint: #DCEDEF;
+$white: #EDF6F9;
+$bone: #E4E4E4;
+
+.sales-list-title{
+    padding: 10px 0px 0px 0px;
+    h3{
+        font-size: 4vw;
+    }
+}
+.sales-section{
+    div{
+        div{
+            div{
+                table{
+                    font-family: $font-family_1;
+                    tr{
+                        th{
+                            width: 33vw;
+                        }
+                        &:not(:first-child) {
+                            th{
+                                font-weight: 400 !important;
+                                border: solid #006D77 2px;
+                            }
+                        }
+                        &:first-child{
+                            th{
+                                border: solid #006D77 2px;
+                                background-color: #006D77;
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

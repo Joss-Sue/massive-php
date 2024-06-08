@@ -1,0 +1,24 @@
+.sales-list-title {
+  padding: 10px 0px 0px 0px;
+}
+.sales-list-title h3 {
+  font-size: 4vw;
+}
+
+.sales-section div div div table {
+  font-family: "Inter", sans-serif;
+}
+.sales-section div div div table tr th {
+  width: 33vw;
+}
+.sales-section div div div table tr:not(:first-child) th {
+  font-weight: 400 !important;
+  border: solid #006D77 2px;
+}
+.sales-section div div div table tr:first-child th {
+  border: solid #006D77 2px;
+  background-color: #006D77;
+  color: white;
+}
+
+/*# sourceMappingURL=sales.css.map */

@@ -28,7 +28,7 @@
     <section class="my-products-section">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 products-table-container">
                     <table id="products-table">
                     </table>
                 </div>

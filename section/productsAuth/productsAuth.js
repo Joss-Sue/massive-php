@@ -27,8 +27,7 @@ function getProductsToAuth(userId){
             });
         },
         error: function(xhr, status, error) {
-            var noProducts = '<p>No hay productos por autorizar</p>';
-            $('#products-to-auth').append(noProducts);
+            $('#products-to-auth').append('<h4>No hay productos por autorizar.</h4>');
             console.log('error');
             console.log(error);
         },

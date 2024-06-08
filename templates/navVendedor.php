@@ -20,6 +20,7 @@
                             <a class="dropdown-item" href="../userprofile/userprofile.php">Perfil</a>
                             <a class="dropdown-item" href="../myProducts/myProducts.php">Mis productos</a>
                             <a class="dropdown-item" href="../cotizacionesAuth/cotizacionesAuth.php">Cotizaciones</a>
+                            <a class="dropdown-item" href="../sales/sales.php">Ventas</a>
                             <a class="dropdown-item" href="../../config/cerrarSesion.php">Cerrar sesión</a>
                         </div>
                     </div>

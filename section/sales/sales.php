@@ -1,38 +1,41 @@
 <?php // /massive/src/icons/
     require("../../config/sessionVerif.php");
-    $titlename = "Pedidos";
-    $stylename = "orders.css";
-    $javascript = "orders.js";
+    $titlename = "Ventas";
+    $stylename = "sales.css";
+    $javascript = "sales.js";
    
     require_once("../../templates/cabecera.php");
 
     switch($_SESSION['usuario_tipo']){
-        case "comprador":
-            require_once("../../templates/nav.php");
+        case "vendedor":
+            require_once("../../templates/navVendedor.php");
             break;
         default:
             header("Location:../login/login.php");
             break;
     }
     
-?>
+ ?>
     
-<section class="orders-list-title">
+<section class="sales-list-title">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h3>Mis pedidos</h3>
+                <h3>Mis ventas</h3>
             </div>
         </div>
     </div>
 </section>
-<section class="orders-section">
+<section class="sales-section">
     <div class="container">
         <div class="row">
-            <div class="col-12 orders-container">
+            <div class="col-12 sales-container">
+                <table id="sales-table">
+                    
+                </table>
             </div>
         </div>
     </div>
-</section>
+</section> 
     
 <?php include("../../templates/pie.php"); ?>

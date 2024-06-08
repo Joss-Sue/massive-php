@@ -26,7 +26,7 @@ function getMyProducts(userId){
             });
         },
         error: function(xhr, status, error) {
-            alert('Error al cargar los productos del vendedor');
+            $('.products-table-container').append('<h4>Aún no tienes productos.</h4>');
             console.log('error');
             console.log(error);
         },
