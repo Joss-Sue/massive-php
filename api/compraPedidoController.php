@@ -108,7 +108,7 @@ function obtenerPedidos($idUsuario, $conexion){
         
            
             foreach ($pedidos as $indice => $pedido) {
-                $sqlQuery="SELECT ventas.articulosTotales, productos.nombreProd, productos.descripcionProd, productos.idProd, productos.precioProd
+                $sqlQuery="SELECT ventas.articulosTotales, productos.nombreProd, productos.descripcionProd, productos.idProd, ventas.precio
                 FROM ventas
                 JOIN productos ON ventas.idProductoVenta = productos.idProd
                 WHERE ventas.idPedido = :idPedido";
