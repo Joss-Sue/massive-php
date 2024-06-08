@@ -1,0 +1,50 @@
+.home-body {
+    background-color: #EDF6F9;
+    padding: 20px 0px 20px 0px;
+    height: 86vh;
+    .banner{
+        div{
+            &:first-child {
+              background-color: #36393B;
+            }
+          
+            &:nth-child(2) {
+                background-color: #36393B;
+          
+                img {
+                    width: 179px;
+                    margin-top: 30px;
+                }
+            }
+          
+            &:nth-child(3) {
+                background-color: #36393B;
+                font-size: 80px;
+                display: flex;
+                flex-direction: column;
+            
+                span {
+                    margin-left: 10px;
+                    &:nth-child(2), &:nth-child(3) {
+                        margin-top: -55px;
+                    }
+                }
+            }
+          
+            &:nth-child(4) {
+              background-image: url("massives.svg");
+            }
+        }
+    }
+    .cards-section {
+        margin-top: 20px;
+      
+        .card-custom {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+  
+  
+  

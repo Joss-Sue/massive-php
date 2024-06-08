@@ -21,8 +21,11 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $search_bar = $_POST["search-bar"];
-        echo '<input type="hidden" id="search-bar" value="'.$search_bar.'">';
+        if(isset($_POST['search-bar'])){
+            echo '<input type="hidden" id="search-bar" value="'.$_POST["search-bar"].'">';
+        }else if(isset($_POST['categoryName'])){
+            echo '<input type="hidden" id="categoryName" value="'.$_POST["categoryName"].'">';
+        }
     }
     
 ?>

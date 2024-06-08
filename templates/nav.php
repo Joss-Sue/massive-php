@@ -25,6 +25,7 @@
                             <a class="dropdown-item" href="../userprofile/userprofile.php">Perfil</a>
                             <a class="dropdown-item" href="../cotizacionesAuth/cotizacionesAuth.php">Cotizaciones</a>
                             <a class="dropdown-item" href="../favorites/favorites.php">Favoritos</a>
+                            <a class="dropdown-item" href="../orders/orders.php">Mis pedidos</a>
                             <a class="dropdown-item" href="../../config/cerrarSesion.php">Cerrar sesión</a>
                         </div>
                     </div>
@@ -35,21 +36,28 @@
     <section class="bottom-nav">
         <div class="container">
             <div class="row categories">
-                <div class="col-3">
+                <div class="col-2">
                 </div>
-                <div class="col-6 inter">
-                    <a href="">Electronica</a>
-                    <a href="">Libros</a>
-                    <a href="">Alimentos</a>
-                    <a href="">Hogar</a>
-                    <a href="">Deportes</a>
-                </div>
-                <div class="col-3">
-                </div>
-            </div>
-            <div class="row all-products">
-                <div class="col-12">
+                <div class="col-8 inter">
+                    <form action="../products/products.php" method="POST">
+                        <input type="hidden" name="categoryName" value="Electronica">
+                        <button type="submit">Electronica</button>
+                    </form>
+                    <form action="../products/products.php" method="POST">
+                        <input type="hidden" name="categoryName" value="Libros">
+                        <button type="submit">Libros</button>
+                    </form>
                     <a href="../products/products.php">Mostrar todos los productos</a>
+                    <form action="../products/products.php" method="POST">
+                        <input type="hidden" name="categoryName" value="Alimentos">
+                        <button type="submit">Alimentos</button>
+                    </form>
+                    <form action="../products/products.php" method="POST">
+                        <input type="hidden" name="categoryName" value="Deportes">
+                        <button type="submit">Deportes</button>
+                    </form>
+                </div>
+                <div class="col-2">
                 </div>
             </div>
         </div>

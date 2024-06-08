@@ -66,13 +66,17 @@ $bone: #E4E4E4;
 nav {
 	.top-nav {
 		background-color: $massive-blue;
-		min-height: 75px;
+		min-height: 8vh;
 		display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         align-content: space-around;
         justify-content: center;
+		padding: 10px 0px;
 		.name-page {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
 			a{
 				display: flex;
 				align-items: center;
@@ -85,7 +89,7 @@ nav {
 					font-size: 36px;
 				}
 			}
-			}
+		}
 		.cart-user {
 			display: flex;
 			align-items: center;
@@ -110,16 +114,19 @@ nav {
 				display: flex;
 				background-color: $white;
 				width: 40%;
+				border-radius: 5px;
 				input {
 					background-color: $white;
 					border: none;
 					width: 250px;
+					border-radius: 5px;
 					&:focus {
 						outline: none;
 					}
 				}
 				button{
 					border: none;
+					border-radius: 5px;
 					&:focus{
 						outline: none;
 					}
@@ -132,6 +139,7 @@ nav {
 	}
 	.bottom-nav {
 		background-color: $bone;
+		height: 6vh;
 		.categories {
 			div {
 				&:nth-child(2) {
@@ -139,25 +147,25 @@ nav {
 					justify-content: space-around;
 				}
 			}
-			a {
+			a, button {
+				margin: 5px 0px;
                 padding: 5px 5px;
 				text-decoration: none;
-				font-size: 1em;
+				font-size: 1.2vw;
 				color: $color_2;
+				border: none;
+				background-color: transparent;
                 @media screen and (max-width: 720px) {
                     font-size: 0.5em;
                   }
                 &:hover{
                     background-color: rgba(0, 0, 0, 0.1);
                     transition: .3s;
+					font-size: 1.23vw;
                 }
 			}
-		}
-		.all-products{
-			text-align: center;
 			a{
-				text-decoration: none;
-				padding: 10px 0px;
+				font-weight: 600;
 			}
 		}
 	}

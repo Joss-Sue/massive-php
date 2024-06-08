@@ -1,0 +1,43 @@
+$font-family_1: "Inter", sans-serif;
+$font-family_2: "Bebas Neue", sans-serif;
+$massive-blue: #006D77;
+$mint: #DCEDEF;
+$white: #EDF6F9;
+$bone: #E4E4E4;
+
+.orders-list-title{
+    padding: 10px 0px 0px 0px;
+    h3{
+        font-size: 4vw;
+    }
+}
+
+.orders-section{
+    padding: 20px 0px;
+    .orders-container{
+        .order{
+            background-color: $mint;
+            border-radius: 15px;
+            padding: 15px 20px 10px 20px;
+            margin-bottom: 20px;
+            .general-info{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+            .products{
+                margin: 15px 0px;
+                .products-info{
+                    display: flex;
+                    img{
+                        object-fit: contain;
+                        width: 10vw;
+                        background-color: white;
+                        margin-right: 1vw;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.orders-list-title {
+  padding: 10px 0px 0px 0px;
+}
+.orders-list-title h3 {
+  font-size: 4vw;
+}
+
+.orders-section {
+  padding: 20px 0px;
+}
+.orders-section .orders-container .order {
+  background-color: #DCEDEF;
+  border-radius: 15px;
+  padding: 15px 20px 10px 20px;
+  margin-bottom: 20px;
+}
+.orders-section .orders-container .order .general-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.orders-section .orders-container .order .products {
+  margin: 15px 0px;
+}
+.orders-section .orders-container .order .products .products-info {
+  display: flex;
+}
+.orders-section .orders-container .order .products .products-info img {
+  object-fit: contain;
+  width: 10vw;
+  background-color: white;
+  margin-right: 1vw;
+}
+
+/*# sourceMappingURL=orders.css.map */

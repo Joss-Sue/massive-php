@@ -33,11 +33,6 @@
                 <div class="col-3">
                 </div>
                 <div class="col-6 inter">
-                    <a href="">Electronica</a>
-                    <a href="">Libros</a>
-                    <a href="">Alimentos</a>
-                    <a href="">Hogar</a>
-                    <a href="">Deportes</a>
                 </div>
                 <div class="col-3">
                 </div>
