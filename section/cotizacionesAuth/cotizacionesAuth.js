@@ -65,6 +65,7 @@ function getCotizacionesComprador(){
         error: function(xhr, status, error) {
             console.log('error');
             console.log(error);
+            $('#cotizaciones-to-auth').append('<h4>Aún no tienes cotizaciones.</h4>');
         },
     });
 

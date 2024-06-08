@@ -20,7 +20,7 @@ function getCartProducts(cartId){
             JSON.parse(response).forEach(function(row) {
                 $('#payButton').prop('disabled', false);
                 $('#payButton').removeClass("unclickable");
-                $("#product-list").append(setProduct(row.nombreProd, row.precioProd, row.cantidad));
+                $("#product-list").append(setProduct(row.nombreProd, row.precioProd, row.cantidad, row.idProdCarrito));
                 total += Number(row.subtotal);
             });
             $(".cart-total").append('$' + total);
@@ -55,9 +55,26 @@ function finishPayment(){
   });
 }
 
-function setProduct(producto, precio, cantidad){
-    var tag =  '<div class="product"><img src="../products/test.jpg" alt=""><div class="info-cart"><p>' + producto + '</p><p>$' + Number(precio) + '</p><button>Eliminar</button></div><div class="quantity">(' + cantidad + ')</div></div>';
+function setProduct(producto, precio, cantidad, idCartProduct){
+    var tag =  '<div class="product"><img src="../products/test.jpg" alt=""><div class="info-cart"><p>' + producto + '</p><p>$' + Number(precio) + '</p><button onclick="deleteFromCart(' + idCartProduct + ')">Eliminar</button></div><div class="quantity">(' + cantidad + ')</div></div>';
     return tag;
+}
+
+function deleteFromCart(idCartProduct){
+  console.log(idCartProduct);
+  $.ajax({
+      type: "DELETE",
+      url: "../../api/productosCarritoController.php",
+      data: JSON.stringify({ id: idCartProduct }),
+      success: function(data) {
+          alert('Producto eliminado del carrito.');
+          location.reload();
+      },
+      error: function(xhr, status, error) {
+          console.log('error');
+          console.log(error);
+      },
+  });
 }
 
 paypal.Buttons({

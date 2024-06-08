@@ -1,33 +1,27 @@
-.user-profile-body{
-    background-color: #EDF6F9;
-    height: 90vh;
+.user-profile-body {
+  background-color: #EDF6F9;
+  height: 90vh;
+}
+.user-profile-body .form-container {
+  display: flex;
+  flex-direction: column;
+}
+.user-profile-body .form-container form {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.user-profile-body .form-container form input {
+  min-width: 45%;
+  margin-bottom: 15px;
+}
+.user-profile-body .form-container span h1 {
+  font-size: 80px;
+  font-size: 60px;
+}
+.user-profile-body form button {
+  width: 10vw;
+  font-size: 30px;
 }
 
-.user-profile-body .form-container{
-    display: flex;
-    flex-direction: column;
-}
-
-.user-profile-body .form-container form{
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-}
-
-.user-profile-body .form-container form input{
-    min-width: 45%;
-    margin-bottom: 15px;
-}
-
-.user-profile-body .form-container span h1{
-    font-size: 80px;
-}
-
-.user-profile-body .form-container span h1{
-    font-size: 60px;
-}
-
-.user-profile-body form button{
-    width: 10vw;
-    font-size: 30px;
-}
+/*# sourceMappingURL=user-profile.css.map */

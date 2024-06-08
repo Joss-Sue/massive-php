@@ -61,7 +61,6 @@ function matchLogin($correo, $contrasena, $conexion, $isRecordar){
         }
 
         echo'<script type="text/javascript">
-        alert("Inicio de sesion con exito");
         window.location.href="../dashboard/dashboard.php";
         </script>';
     }else{

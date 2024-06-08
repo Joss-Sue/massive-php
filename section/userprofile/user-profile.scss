@@ -1,0 +1,31 @@
+.user-profile-body {
+    background-color: #EDF6F9;
+    height: 90vh;
+  
+    .form-container {
+      display: flex;
+      flex-direction: column;
+  
+      form {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+  
+        input {
+          min-width: 45%;
+          margin-bottom: 15px;
+        }
+      }
+  
+      span h1 {
+        font-size: 80px;
+        font-size: 60px;
+      }
+    }
+  
+    form button {
+      width: 10vw;
+      font-size: 30px;
+    }
+  }
+  

@@ -1,5 +1,8 @@
 .cotizaciones-auth-title {
-  padding: 15px 0px;
+  padding: 10px 0px 10px 0px;
+}
+.cotizaciones-auth-title h3 {
+  font-size: 3vw;
 }
 
 .cotizaciones-to-auth-section div div div table {

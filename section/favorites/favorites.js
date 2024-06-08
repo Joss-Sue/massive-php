@@ -21,6 +21,7 @@ function getFavorites(){
         error: function(xhr, status, error) {
             console.log('error');
             console.log(error);
+            $('#product-list').append('<h4>Aún no tienes favoritos.</h4>');
         },
     });
 }

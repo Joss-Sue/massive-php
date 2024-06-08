@@ -36,4 +36,23 @@
   justify-content: center;
 }
 
+.weather-section {
+  padding: 2vh 0vh;
+  background-image: url("sky3.jpg");
+  object-fit: contain;
+}
+.weather-section .temperatures {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.weather-section .temperatures .temperature {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
 /*# sourceMappingURL=home.css.map */
