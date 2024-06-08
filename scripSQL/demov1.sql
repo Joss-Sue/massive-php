@@ -515,3 +515,24 @@ drop procedure   ActualizarInsertarCarrito;
 		WHERE productosCarrito.idCarrito = _idCarrito and activo = 1 ) where idCart = _idCarrito;
     END //
     DELIMITER ;
+
+-- /////////////////////////////////////
+
+        drop procedure  if exists getProductosCarrito;
+        DELIMITER //
+    CREATE PROCEDURE GetProductosCarrito(IN carritoID INT)
+BEGIN
+    SELECT 
+		productosCarrito.idProdCarrito,
+        productosCarrito.cantidad, 
+        productos.nombreProd, 
+        productosCarrito.precioCarrito as precioProd, 
+        productosCarrito.precioCarrito * productosCarrito.cantidad as subtotal
+    FROM 
+        productosCarrito 
+    JOIN 
+        productos ON productosCarrito.productoID = productos.idProd
+    WHERE productosCarrito.idCarrito = carritoID and  productosCarrito.activo = 1
+	order by productosCarrito.idProdCarrito desc;
+END //
+DELIMITER ;
